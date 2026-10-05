@@ -385,6 +385,43 @@ a{text-decoration:none;color:inherit}button,input{font:inherit}img{max-width:100
 
 </style>
 
+
+<style>
+/* Login visual stats — desktop-only hover */
+@media (min-width:1025px) and (hover:hover) and (pointer:fine) {
+  .visual-stats .visual-stat {
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease,
+                border-color .3s ease, background-color .3s ease;
+  }
+  .visual-stats .visual-stat::after {
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:0;
+    width:55%;
+    height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+    transform:skewX(-18deg);
+    transition:left .55s ease;
+    pointer-events:none;
+  }
+  .visual-stats .visual-stat:hover {
+    transform:translateY(-6px);
+    box-shadow:0 14px 32px rgba(60,114,252,.18);
+    border-color:rgba(60,114,252,.45);
+  }
+  .visual-stats .visual-stat:hover::after { left:140%; }
+}
+@media (max-width:1024px), (hover:none), (pointer:coarse) {
+  .visual-stats .visual-stat:hover {
+    transform:none !important;
+    box-shadow:none !important;
+  }
+}
+</style>
+
 </head>
 
 <body class="loading">
