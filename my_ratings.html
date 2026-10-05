@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IT Reports | STACKLY</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif;}
+
+body{
+background:linear-gradient(135deg,#0a0a0a,#0a0a0a,#0a0a0a);
+color:#f5f5f5;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* HEADER */
+header{
+position:fixed;
+top:0;
+width:100%;
+height:70px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 25px;
+background:#111111;
+box-shadow:0 4px 15px rgba(0,0,0,.06);
+z-index:3000;
+}
+
+.header-left{display:flex;align-items:center;}
+.logo img {
+    height: 65px;
+}
+
+/* Mobile logo size */
+@media (max-width: 768px) {
+    .logo img {
+        height: 35px;
+        width: auto;
+    }
+}
+
+.profile{display:flex;gap:15px;align-items:center;}
+.profile i{color:#f5f5f5;}
+
+#profileEmail{
+color:#9b9ba3;
+font-size:11px;
+}
+
+#profileName{
+font-weight:600;
+font-size:14px;
+color:#f5f5f5;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:250px;
+background:#111111;
+border-right:1px solid rgba(255,255,255,.08);
+position:fixed;
+top:70px;
+height:calc(100% - 70px);
+padding:20px;
+display:flex;
+flex-direction:column;
+z-index:2500;
+transition:0.3s;
+}
+
+.sidebar a{
+display:flex;
+gap:12px;
+padding:12px;
+border-radius:10px;
+color:#9b9ba3;
+text-decoration:none;
+margin-bottom:5px;
+align-items:center;
+transition:0.2s;
+}
+
+.sidebar a:hover{
+background:#0a0a0a;
+color:#138CFF;
+}
+
+.sidebar a.active{
+background:#138CFF;
+color:#111111;
+}
+
+.sidebar .logout{
+    color:#138CFF;
+    border:1px solid rgba(19,140,255,0.10);
+    background:rgba(19,140,255,0.03);
+    margin-top:10px;
+    cursor:pointer;
+    padding:12px;
+    border-radius:10px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    text-decoration:none;
+    transition:all .3s ease;
+}
+
+.sidebar .logout:hover{
+    background:rgba(19,140,255,0.12);
+    color:#138CFF;
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(19,140,255,.25);
+}
+
+/* MAIN */
+.main{
+margin-left:250px;
+padding:100px 30px;
+}
+
+/* REVIEW CARDS */
+.review{
+background:#111111;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+border:1px solid rgba(255,255,255,.08);
+transition:0.3s;
+cursor:pointer;
+}
+
+.review:hover{
+transform:translateY(-5px);
+border-color:#138CFF;
+box-shadow:0 15px 40px rgba(19,140,255,0.18);
+}
+
+.review h4{
+margin-bottom:8px;
+}
+
+.stars{
+color:#138CFF;
+margin-bottom:8px;
+}
+
+/* PANEL */
+.panel{
+background:#111111;
+padding:25px;
+border-radius:15px;
+margin-top:30px;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.btn{
+background:#138CFF;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+color:#111111;
+margin-top:10px;
+cursor:pointer;
+font-weight:600;
+}
+
+/* HAMBURGER */
+.hamburger{
+display:none;
+font-size:24px;
+cursor:pointer;
+color:#138CFF;
+margin-right:15px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.hamburger{display:flex;}
+
+.sidebar{
+transform:translateX(-100%);
+top:70px;
+height:calc(100% - 70px);
+width:280px;
+}
+
+.sidebar.active{
+transform:translateX(0);
+}
+
+.main{
+margin-left:0;
+padding:90px 20px;
+}
+
+.overlay{
+top:70px;
+height:calc(100% - 70px);
+position:fixed;
+left:0;
+width:100%;
+background:rgba(0,0,0,0.3);
+opacity:0;
+visibility:hidden;
+transition:0.3s;
+z-index:2000;
+}
+
+.overlay.active{
+opacity:1;
+visibility:visible;
+}
+}
+
+/* PREMIUM AUTOMOTIVE REVIEW PAGE HOVERS */
+
+.btn{
+    transition:all .3s ease;
+}
+
+.btn:hover{
+background:#138CFF;
+transform:translateY(-4px);
+box-shadow:0 12px 25px rgba(19,140,255,.30);
+}
+
+.panel{
+    transition:all .3s ease;
+}
+
+.panel:hover{
+transform:translateY(-4px);
+box-shadow:0 20px 45px rgba(19,140,255,.18);
+}
+
+.review{
+    transition:all .3s ease;
+}
+
+.review:hover{
+    transform:translateY(-8px);
+}
+
+.fa-bell,
+.fa-user{
+    transition:all .3s ease;
+}
+
+.fa-bell:hover,
+.fa-user:hover{
+transform:scale(1.1);
+color:#138CFF;
+}
+
+.sidebar a{
+    transition:all .3s ease;
+}
+
+@media (max-width: 768px) {
+    .mobile-hide {
+        display: none !important;
+    }
+}
+
+@media (max-width:768px){
+
+    #profileName{
+        font-size:14px;
+        font-weight:600;
+    }
+
+    #profileEmail{
+        font-size:10px;
+        color:#8f8f98;
+        max-width:130px;
+        overflow-wrap:anywhere;
+    }
+
+}
+
+header {
+    position:fixed;
+    top:0;
+    width:100%;
+    height:70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+    background:#111111;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    z-index:3000;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+}
+
+.logo img {
+    height: 65px;
+}
+
+/* Mobile logo size */
+@media (max-width: 768px) {
+    .logo img {
+        height: 35px;
+        width: auto;
+    }
+}
+
+.profile{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.profile i{
+    color:#f5f5f5;
+}
+
+@media(max-width:768px){
+
+    .hamburger{
+        display:flex;
+    }
+
+    .sidebar{
+        transform:translateX(-100%);
+        background:#111111;
+        top:70px;
+        height:calc(100% - 70px);
+        width:280px;
+    }
+
+    .sidebar.active{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        padding:90px 20px;
+    }
+
+    .overlay{
+        top:70px;
+        height:calc(100% - 70px);
+        position:fixed;
+        left:0;
+        width:100%;
+        background:rgba(0,0,0,0.3);
+        opacity:0;
+        visibility:hidden;
+        transition:0.3s;
+        z-index:2000;
+    }
+
+    .overlay.active{
+        opacity:1;
+        visibility:visible;
+    }
+}
+
+@media (max-width:768px){
+
+    #profileName{
+        font-size:14px;
+        font-weight:600;
+    }
+
+    #profileEmail{
+        font-size:10px;
+        color:#8f8f98;
+        max-width:130px;
+        overflow-wrap:anywhere;
+    }
+}
+
+@media (max-width:768px){
+
+    .profile-info{
+        display:flex !important;
+        flex-direction:column;
+        line-height:1.2;
+        max-width:120px;
+    }
+
+    .profile-name{
+        display:block !important;
+        font-size:12px;
+        font-weight:600;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+    .profile-email{
+        display:block !important;
+        font-size:10px;
+        color:#8f8f98;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+}                                                                    
+
+</style>
+
+<style id="fm-dashboard-theme">
+html,body{
+    background:#080808 !important;
+    color:#f5f5f5 !important;
+}
+header{
+    background:#111111 !important;
+    border-bottom:1px solid rgba(255,255,255,.035) !important;
+    box-shadow:0 8px 30px rgba(0,0,0,.28) !important;
+}
+.sidebar{
+    background:#111111 !important;
+    border-right:1px solid rgba(255,255,255,.08) !important;
+}
+.sidebar a{
+    color:#9b9ba3 !important;
+}
+.sidebar a:hover{
+    background:#0a0a0a !important;
+    color:#138CFF !important;
+    transform:translateX(3px);
+}
+.sidebar a.active{
+    background:#138CFF !important;
+    color:#fff !important;
+}
+.review,.panel{
+    background:#111111 !important;
+    border-color:rgba(255,255,255,.08) !important;
+    box-shadow:0 18px 50px rgba(0,0,0,.28) !important;
+}
+.review{
+    transition:all .3s ease !important;
+}
+.review:hover{
+    transform:translateY(-8px) !important;
+    border-color:#138CFF !important;
+    box-shadow:0 18px 45px rgba(19,140,255,.18) !important;
+}
+.stars{
+    color:#138CFF !important;
+}
+.review p,.panel p{
+    color:#d8d8dc !important;
+}
+.panel{
+    transition:all .3s ease !important;
+}
+.panel:hover{
+    transform:translateY(-4px) !important;
+    box-shadow:0 20px 45px rgba(19,140,255,.18) !important;
+}
+.btn{
+    background:#138CFF !important;
+    color:#fff !important;
+    transition:all .3s ease !important;
+}
+.btn:hover{
+    background:#138CFF !important;
+    transform:translateY(-4px) !important;
+    box-shadow:0 12px 25px rgba(19,140,255,.30) !important;
+}
+.profile i{
+    color:#f5f5f5 !important;
+}
+.profile i:hover,.fa-bell:hover,.fa-user:hover{
+    color:#138CFF !important;
+    transform:scale(1.1);
+}
+.hamburger{
+    color:#138CFF !important;
+}
+.sidebar .logout{
+    color:#138CFF !important;
+    border-color:rgba(19,140,255,.10) !important;
+    background:rgba(19,140,255,.03) !important;
+}
+.sidebar .logout:hover{
+    background:rgba(19,140,255,.12) !important;
+    color:#138CFF !important;
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(19,140,255,.25);
+}
+.overlay{
+    background:rgba(0,0,0,.8) !important;
+}
+</style>
+
+<style>
+@media (hover: none), (pointer: coarse){
+    .sidebar a:hover,
+    .sidebar a.logout:hover,
+    .card:hover,
+    .add-btn:hover,
+    .action-btn:hover,
+    .bell:hover,
+    .fa-user:hover{
+        transform:none !important;
+        box-shadow:none !important;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <div class="header-left">
+        <div class="hamburger" onclick="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="logo">
+            <img src="assets/images/logo/stackly_logo.webp" alt="Stackly">
+        </div>
+    </div>
+
+    <div class="profile">
+        <i class="fa-regular fa-bell mobile-hide" onclick="go404()" style="cursor:pointer;font-size:18px;"></i>
+
+        <i class="fa-regular fa-user mobile-hide"
+           onclick="go404()"
+           style="font-size:22px;cursor:pointer;"></i>
+
+        <div>
+            <div id="profileName" style="font-weight:600;font-size:14px;">User</div>
+            <div id="profileEmail" style="font-size:11px;color:#9b9ba3;">user@mail.com</div>
+        </div>
+    </div>
+</header>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<aside class="sidebar" id="sidebar">
+
+<a href="fm_dashboard.html"><i class="fa-solid fa-house"></i>Dashboard</a>
+<a href="watchlist.html"><i class="fa-solid fa-calendar-check"></i>My Service Enquiries</a>
+<a href="my_ratings.html" class="active"><i class="fa-solid fa-chart-line"></i>IT Reports</a>
+<a href="fm_settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
+
+<div class="logout" onclick="logoutUser()">
+<i class="fa-solid fa-right-from-bracket"></i>Logout
+</div>
+
+</aside>
+
+<main class="main">
+
+<h1 style="margin-bottom:25px;font-weight:800;">IT Reports ✨</h1>
+
+<!-- REPORTS -->
+<div class="review" onclick="go404()">
+<h4>Subscription Plans</h4>
+<div class="stars">★★★★★</div>
+<p>The Subscription Plans service has been successfully reviewed. Platform details and customer information are up to date.</p>
+</div>
+
+<div class="review" onclick="go404()">
+<h4>Platform Services & Maintenance</h4>
+<div class="stars">★★★★☆</div>
+<p>Platform Services and maintenance details are stable. A follow-up review is recommended to keep the service experience updated.</p>
+</div>
+
+<div class="review" onclick="go404()">
+<h4>Premium IT Solutions</h4>
+<div class="stars">★★★☆☆</div>
+<p>Premium IT Solutions details were successfully reviewed. Service information is updated and ready for your next visit.</p>
+</div>
+
+<!-- STATS -->
+<div class="panel">
+<h3>Subscription Plans Summary</h3>
+<p>Total IT Reviews Completed: <b>12</b></p>
+<p>Average IT Service Rating: <b style="color:#138CFF;">4.8</b></p>
+
+<button class="btn" onclick="go404()">View IT Report</button>
+</div>
+
+</main>
+
+<script>
+function toggleSidebar(){
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+
+sidebar.classList.toggle("active");
+overlay.classList.toggle("active");
+}
+
+function go404(){ window.location.href="fm_404.html"; }
+
+function logoutUser(){
+localStorage.clear();
+window.location.href="login.html";
+}
+
+const storedData = localStorage.getItem("userData");
+if(storedData){
+const user = JSON.parse(storedData);
+document.getElementById("profileName").textContent = user.role || "User";
+document.getElementById("profileEmail").textContent = user.email;
+}
+</script>
+
+</body>
+</html>

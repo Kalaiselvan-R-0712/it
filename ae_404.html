@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>404 - Page Not Found | STACKLY</title>
+
+  <link rel="icon" href="assets/images/logo/stackly_logo.webp">
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <style>
+
+    /* =========================================================
+       ROOT
+    ========================================================= */
+
+    :root {
+      --cyan: #19dcff;
+      --blue: #3f8cff;
+      --violet: #7b45ff;
+
+      --bg: #020711;
+
+      --white: #f2f9ff;
+      --muted: #8aa0b5;
+
+      --line: rgba(90, 190, 255, 0.20);
+    }
+
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+
+    html {
+      background: var(--bg);
+    }
+
+
+    body {
+      width: 100%;
+      min-height: 100svh;
+
+      overflow: hidden;
+
+      font-family: "Space Grotesk", sans-serif;
+
+      color: var(--white);
+
+      background: var(--bg);
+
+      overscroll-behavior: none;
+    }
+
+
+    /* =========================================================
+       FULL-SCREEN ONLINE TECH BACKGROUND
+       Online image loads first; embedded SVG is the fallback.
+    ========================================================= */
+
+    .background-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(1,6,16,.12), rgba(1,6,16,.34)),
+        url("assets/images/404/01.webp")
+        center / cover no-repeat,
+        #020711;
+    }
+
+    .background-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      opacity: .90;
+      filter: saturate(1.05) contrast(1.04) brightness(.96);
+      transform: scale(1.02);
+    }
+
+    .background-layer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(1,6,16,.10), rgba(1,6,16,.30)),
+        radial-gradient(circle at 50% 42%, rgba(25,220,255,.08), transparent 36%),
+        linear-gradient(90deg, rgba(1,6,16,.08), transparent 50%, rgba(1,6,16,.10));
+      pointer-events: none;
+    }
+
+    @keyframes backgroundDrift {
+      from { transform: scale(1.02); }
+      to   { transform: scale(1.05); }
+    }
+
+    .background-photo {
+      animation: backgroundDrift 20s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    /* =========================================================
+       MAIN SCREEN
+    ========================================================= */
+
+    .error-page {
+
+      width: 100%;
+
+      height: 100svh;
+
+      min-height: 100svh;
+
+      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: hidden;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 24px;
+
+      position: relative;
+      z-index: 1;
+
+      isolation: isolate;
+    }
+    /* =========================================================
+       CENTER CONTENT
+    ========================================================= */
+
+    .error-content {
+
+      width: min(1100px, 100%);
+
+      text-align: center;
+
+      position: relative;
+
+      z-index: 5;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+    }
+
+
+    /* =========================================================
+       STACKLY LABEL
+    ========================================================= */
+
+    .error-brand {
+
+      margin-bottom: 10px;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      letter-spacing: 7px;
+
+      color: #ffffff;
+    }
+
+
+    .error-tagline {
+
+      margin-bottom: 23px;
+
+      padding: 8px 16px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 8px;
+
+      letter-spacing: 5px;
+
+      color: #bfe9ff;
+
+      text-transform: uppercase;
+
+      background: rgba(2, 10, 22, 0.48);
+
+      border: 1px solid rgba(78, 190, 255, 0.13);
+
+      border-radius: 999px;
+
+      backdrop-filter: blur(9px);
+
+      -webkit-backdrop-filter: blur(9px);
+
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.80);
+
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+
+      position: relative;
+
+      z-index: 2;
+    }
+
+
+    /* =========================================================
+       404 NUMBER
+    ========================================================= */
+
+    .error-number {
+
+      position: relative;
+
+      font-size: clamp(
+        170px,
+        25vw,
+        360px
+      );
+
+      line-height: 0.72;
+
+      letter-spacing: -18px;
+
+      font-weight: 700;
+
+      user-select: none;
+
+      background:
+
+        linear-gradient(
+          110deg,
+          #f4fbff 5%,
+          var(--cyan) 36%,
+          #8bc9ff 61%,
+          var(--violet) 96%
+        );
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+
+      filter:
+        drop-shadow(0 0 20px rgba(25, 220, 255, 0.16))
+        drop-shadow(0 0 55px rgba(25, 220, 255, 0.08));
+    }
+
+
+    /* =========================================================
+       ERROR TITLE
+    ========================================================= */
+
+    .error-title {
+
+      margin-top: 30px;
+
+      font-size: clamp(
+        28px,
+        4vw,
+        48px
+      );
+
+      font-weight: 500;
+
+      letter-spacing: 7px;
+
+      text-transform: uppercase;
+
+      color: #f2f9ff;
+    }
+
+
+    .error-title span {
+
+      background:
+
+        linear-gradient(
+          100deg,
+          var(--cyan),
+          #8fcaff,
+          var(--violet)
+        );
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+    }
+
+
+    /* =========================================================
+       MESSAGE
+    ========================================================= */
+
+    .error-message {
+
+      width: min(700px, 100%);
+
+      margin: 18px auto 0;
+
+      padding: 11px 18px;
+
+      color: #dbeeff;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+
+      text-align: center;
+
+      background: rgba(2, 10, 22, 0.52);
+
+      border: 1px solid rgba(78, 190, 255, 0.14);
+
+      border-radius: 12px;
+
+      backdrop-filter: blur(8px);
+
+      -webkit-backdrop-filter: blur(8px);
+
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    }
+
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .error-actions {
+
+      margin-top: 30px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 12px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .error-btn {
+
+      min-height: 52px;
+
+      padding: 0 25px;
+
+      border-radius: 12px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      text-decoration: none;
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      letter-spacing: 0.3px;
+
+      cursor: pointer;
+
+      border: 1px solid var(--line);
+
+      font-family: inherit;
+    }
+
+
+    /* PRIMARY */
+
+    .error-btn-primary {
+
+      color: #001018;
+
+      border: none;
+
+      background:
+
+        linear-gradient(
+          105deg,
+          var(--cyan),
+          #55b8ff 55%,
+          var(--violet)
+        );
+
+      box-shadow:
+        0 14px 35px rgba(25, 220, 255, 0.14);
+    }
+
+
+    /* SECONDARY */
+
+    .error-btn-secondary {
+
+      color: #e1f2ff;
+
+      background: rgba(4, 14, 26, 0.70);
+
+      backdrop-filter: blur(15px);
+
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+
+    /* =========================================================
+       SMALL INFO LINE
+    ========================================================= */
+
+    .error-info {
+
+      margin-top: 25px;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      color: #b9d7ea;
+
+      font-size: 8px;
+
+      letter-spacing: 1.4px;
+
+      position: relative;
+
+      z-index: 2;
+    }
+
+
+    .error-info span {
+
+      min-height: 34px;
+
+      padding: 0 12px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      color: #bfe3f6;
+
+      background: rgba(2, 10, 22, 0.50);
+
+      border: 1px solid rgba(78, 190, 255, 0.13);
+
+      border-radius: 999px;
+
+      backdrop-filter: blur(8px);
+
+      -webkit-backdrop-filter: blur(8px);
+
+      text-shadow: 0 1px 7px rgba(0, 0, 0, 0.78);
+
+      box-shadow: 0 7px 22px rgba(0, 0, 0, 0.14);
+    }
+
+
+    .error-info i {
+
+      color: var(--cyan);
+
+      font-size: 8px;
+
+      filter: drop-shadow(0 0 5px rgba(25, 220, 255, 0.35));
+    }
+
+
+    /* =========================================================
+       DECORATIVE GLOW
+    ========================================================= */
+
+    .center-glow {
+
+      position: absolute;
+
+      width: 500px;
+
+      height: 500px;
+
+      left: 50%;
+
+      top: 50%;
+
+      transform:
+        translate(-50%, -45%);
+
+      border-radius: 50%;
+
+      background:
+
+        radial-gradient(
+          circle,
+          rgba(25, 220, 255, 0.08),
+          transparent 68%
+        );
+
+      pointer-events: none;
+
+      z-index: -1;
+    }
+
+
+    /* =========================================================
+       DESKTOP HOVER ONLY
+    ========================================================= */
+
+    @media
+      (min-width: 1025px)
+      and (hover: hover)
+      and (pointer: fine) {
+
+      .error-btn {
+
+        transition:
+          transform 0.32s cubic-bezier(.22,1,.36,1),
+          box-shadow 0.32s ease,
+          border-color 0.32s ease,
+          background 0.32s ease;
+      }
+
+
+      .error-btn-primary:hover {
+
+        transform: translateY(-5px);
+
+        box-shadow:
+
+          0 22px 45px rgba(25, 220, 255, 0.22),
+
+          0 0 28px rgba(123, 69, 255, 0.12);
+      }
+
+
+      .error-btn-secondary:hover {
+
+        transform: translateY(-5px);
+
+        border-color: rgba(25, 220, 255, 0.42);
+
+        background: rgba(7, 25, 42, 0.92);
+
+        box-shadow:
+          0 18px 40px rgba(0, 0, 0, 0.40);
+      }
+}
+
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before {
+        animation: none !important;
+      }
+    }
+
+    /* =========================================================
+       TABLET
+    ========================================================= */
+
+    @media
+      (max-width: 1024px),
+      (hover: none),
+      (pointer: coarse) {
+
+      .background-photo {
+        animation: none !important;
+      }
+
+      .error-btn {
+
+        transition: none !important;
+      }
+
+
+      .error-btn:hover {
+
+        transform: none !important;
+
+        box-shadow: none !important;
+      }
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 700px) {
+
+      .error-page {
+
+        padding: 20px;
+      }
+.error-brand {
+
+        font-size: 12px;
+
+        letter-spacing: 5px;
+      }
+
+
+      .error-tagline {
+
+        padding: 7px 13px;
+
+        font-size: 7px;
+
+        letter-spacing: 3px;
+
+        margin-bottom: 17px;
+      }
+
+
+      .error-number {
+
+        font-size: clamp(
+          105px,
+          30vw,
+          170px
+        );
+
+        letter-spacing: -8px;
+
+        line-height: 0.78;
+      }
+
+
+      .error-title {
+
+        margin-top: 23px;
+
+        font-size: 27px;
+
+        letter-spacing: 3px;
+      }
+
+
+      .error-message {
+
+        max-width: 410px;
+
+        padding: 9px 13px;
+
+        font-size: 11px;
+
+        line-height: 1.7;
+
+        margin-top: 13px;
+
+        border-radius: 10px;
+      }
+
+
+      .error-actions {
+
+        width: min(370px, 100%);
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 9px;
+
+        margin-top: 24px;
+      }
+
+
+      .error-btn {
+
+        width: 100%;
+
+        min-height: 49px;
+      }
+
+
+      .error-info {
+
+        margin-top: 17px;
+
+        gap: 7px;
+
+        font-size: 7px;
+      }
+
+      .error-info span {
+
+        min-height: 31px;
+
+        padding: 0 9px;
+      }
+
+
+      .center-glow {
+
+        width: 330px;
+
+        height: 330px;
+      }
+    }
+
+
+    /* =========================================================
+       SMALL MOBILE
+    ========================================================= */
+
+    @media (max-width: 420px) {
+.error-brand {
+
+        font-size: 10px;
+
+        letter-spacing: 4px;
+      }
+
+
+      .error-tagline {
+
+        padding: 6px 10px;
+
+        font-size: 6px;
+
+        letter-spacing: 2.5px;
+
+        margin-bottom: 14px;
+      }
+
+
+      .error-number {
+
+        font-size: 105px;
+
+        letter-spacing: -7px;
+      }
+
+
+      .error-title {
+
+        font-size: 24px;
+
+        letter-spacing: 2px;
+
+        margin-top: 21px;
+      }
+
+
+      .error-message {
+
+        max-width: 315px;
+
+        padding: 8px 11px;
+
+        font-size: 10px;
+
+        line-height: 1.65;
+
+        border-radius: 9px;
+      }
+
+
+      .error-actions {
+
+        margin-top: 21px;
+      }
+
+
+      .error-info {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        justify-items: center;
+
+        gap: 6px;
+      }
+
+      .error-info span {
+
+        min-height: 29px;
+
+        padding: 0 7px;
+
+        width: 100%;
+
+        font-size: 6.5px;
+      }
+    }
+
+
+    /* =========================================================
+       SHORT SCREEN
+    ========================================================= */
+
+    @media (max-height: 700px) {
+
+      .error-brand {
+
+        font-size: 10px;
+      }
+
+
+      .error-tagline {
+
+        margin-bottom: 13px;
+      }
+
+
+      .error-number {
+
+        font-size: clamp(
+          90px,
+          22vh,
+          170px
+        );
+      }
+
+
+      .error-title {
+
+        font-size: 26px;
+
+        margin-top: 18px;
+      }
+
+
+      .error-message {
+
+        margin-top: 8px;
+
+        padding: 7px 10px;
+
+        font-size: 10px;
+
+        line-height: 1.6;
+      }
+
+
+      .error-actions {
+
+        margin-top: 17px;
+      }
+
+
+      .error-info {
+
+        margin-top: 13px;
+      }
+    }
+
+
+    /* =========================================================
+       VERY SHORT SCREEN
+    ========================================================= */
+
+    @media (max-height: 560px) {
+.error-brand,
+      .error-tagline,
+      .error-info {
+
+        display: none;
+      }
+
+
+      .error-number {
+
+        font-size: 100px;
+      }
+
+
+      .error-title {
+
+        margin-top: 17px;
+
+        font-size: 24px;
+      }
+
+
+      .error-message {
+
+        margin-top: 8px;
+      }
+
+
+      .error-actions {
+
+        margin-top: 15px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="background-layer" aria-hidden="true">
+    <img
+      class="background-photo"
+      src="https://assets.lumenalta.com/f/1019928/735x437/c55ee5ba27/how-cloud-computing-works-diagram.png"
+      alt=""
+      onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201600%20900%22%3E%0A%3Cdefs%3E%0A%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23020712%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%22.48%22%20stop-color%3D%22%23061a2f%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230a061c%22%2F%3E%0A%20%20%3C%2FlinearGradient%3E%0A%20%20%3CradialGradient%20id%3D%22c1%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%2319dcff%22%20stop-opacity%3D%22.38%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2319dcff%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3CradialGradient%20id%3D%22c2%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%237b45ff%22%20stop-opacity%3D%22.33%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%237b45ff%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3ClinearGradient%20id%3D%22floor%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%23071a2a%22%20stop-opacity%3D%22.15%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2302050e%22%20stop-opacity%3D%22.95%22%2F%3E%0A%20%20%3C%2FlinearGradient%3E%0A%3C%2Fdefs%3E%0A%0A%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url(%23bg)%22%2F%3E%0A%3Cellipse%20cx%3D%22280%22%20cy%3D%22220%22%20rx%3D%22420%22%20ry%3D%22310%22%20fill%3D%22url(%23c1)%22%2F%3E%0A%3Cellipse%20cx%3D%221340%22%20cy%3D%22650%22%20rx%3D%22440%22%20ry%3D%22330%22%20fill%3D%22url(%23c2)%22%2F%3E%0A%0A%3Cg%20opacity%3D%22.16%22%20stroke%3D%22%237fe8ff%22%20fill%3D%22none%22%3E%0A%20%20%3Cpath%20d%3D%22M0%20100H1600M0%20200H1600M0%20300H1600M0%20400H1600M0%20500H1600M0%20600H1600M0%20700H1600%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M100%200V900M260%200V900M420%200V900M580%200V900M740%200V900M900%200V900M1060%200V900M1220%200V900M1380%200V900M1540%200V900%22%2F%3E%0A%3C%2Fg%3E%0A%0A%3Cg%20stroke%3D%22%2319dcff%22%20stroke-opacity%3D%22.28%22%20fill%3D%22none%22%20stroke-width%3D%222%22%3E%0A%20%20%3Cpath%20d%3D%22M40%20650L270%20540L500%20610L750%20390L1000%20500L1240%20270L1550%20400%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M70%20330L330%20430L570%20295L830%20380L1050%20235L1290%20385L1510%20225%22%2F%3E%0A%3C%2Fg%3E%0A%0A%3Cg%20fill%3D%22%2319dcff%22%3E%0A%20%20%3Ccircle%20cx%3D%22270%22%20cy%3D%22540%22%20r%3D%226%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22750%22%20cy%3D%22390%22%20r%3D%226%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221240%22%20cy%3D%22270%22%20r%3D%226%22%2F%3E%0A%3C%2Fg%3E%0A%0A%3Cg%20fill%3D%22%23062034%22%20stroke%3D%22%2319dcff%22%20stroke-opacity%3D%22.35%22%3E%0A%20%20%3Crect%20x%3D%22205%22%20y%3D%22495%22%20width%3D%22150%22%20height%3D%2274%22%20rx%3D%2214%22%2F%3E%0A%20%20%3Crect%20x%3D%22680%22%20y%3D%22345%22%20width%3D%22150%22%20height%3D%2274%22%20rx%3D%2214%22%2F%3E%0A%20%20%3Crect%20x%3D%221165%22%20y%3D%22225%22%20width%3D%22150%22%20height%3D%2274%22%20rx%3D%2214%22%2F%3E%0A%3C%2Fg%3E%0A%0A%3Cg%20fill%3D%22%23a8eaff%22%20opacity%3D%22.65%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2212%22%3E%0A%20%20%3Ctext%20x%3D%22228%22%20y%3D%22525%22%3EAPI%20NODE%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22703%22%20y%3D%22375%22%3ECLOUD%20CORE%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%221188%22%20y%3D%22255%22%3EDATA%20FLOW%3C%2Ftext%3E%0A%3C%2Fg%3E%0A%0A%3Cpath%20d%3D%22M0%20735Q400%20600%20800%20710T1600%20650V900H0Z%22%20fill%3D%22url(%23floor)%22%2F%3E%0A%3Cg%20stroke%3D%22%235de2ff%22%20stroke-opacity%3D%22.35%22%3E%0A%20%20%3Cpath%20d%3D%22M0%20770H1600%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%20808H1600%22%20opacity%3D%22.45%22%2F%3E%0A%3C%2Fg%3E%0A%0A%3Cg%20opacity%3D%22.4%22%20fill%3D%22%23bdf4ff%22%3E%0A%20%20%3Ccircle%20cx%3D%22110%22%20cy%3D%22115%22%20r%3D%222%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22240%22%20cy%3D%2275%22%20r%3D%221.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22430%22%20cy%3D%22130%22%20r%3D%222%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22960%22%20cy%3D%22100%22%20r%3D%222%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221180%22%20cy%3D%2275%22%20r%3D%221.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%221470%22%20cy%3D%22125%22%20r%3D%222%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E'">
+  </div>
+
+
+  <div class="error-page">
+<!-- =====================================================
+         CENTER CONTENT
+    ====================================================== -->
+
+    <main class="error-content">
+
+      <div class="center-glow"></div>
+
+
+      <div class="error-brand">
+        STACKLY
+      </div>
+
+
+      <div class="error-tagline">
+        BUILT TO MOVE FORWARD
+      </div>
+
+
+      <!-- BIG CENTERED 404 -->
+
+      <div
+        class="error-number"
+        aria-label="404">
+
+        404
+
+      </div>
+
+
+      <!-- ERROR TITLE -->
+
+      <h1 class="error-title">
+
+        <span>PAGE</span> NOT FOUND
+
+      </h1>
+
+
+      <!-- MESSAGE -->
+
+      <p class="error-message">
+
+        The page you're looking for doesn't exist,
+        has moved, or the route is no longer available.
+        Let's get you back into the Stackly experience.
+
+      </p>
+
+
+      <!-- =================================================
+           ACTION BUTTONS
+      ================================================== -->
+
+      <div class="error-actions">
+
+
+        <!-- PREVIOUS PAGE -->
+
+        <button
+          type="button"
+          class="error-btn error-btn-secondary"
+          id="backPrevious">
+
+          <i class="fa-solid fa-arrow-left"></i>
+
+          Back to Previous Page
+
+        </button>
+
+
+        <!-- HOME -->
+
+        <a
+          href="ae_dashboard.html"
+          class="error-btn error-btn-primary">
+
+          <i class="fa-solid fa-laptop"></i>
+
+          Back to Admin Dashboard
+
+        </a>
+
+
+      </div>
+
+
+      <!-- =================================================
+           SMALL TECH INFO
+      ================================================== -->
+
+      <div class="error-info">
+
+        <span>
+          <i class="fa-solid fa-cloud"></i>
+          IT PLATFORM
+        </span>
+
+        <span>
+          <i class="fa-solid fa-code-branch"></i>
+          SMART ROUTING
+        </span>
+
+        <span>
+          <i class="fa-solid fa-shield-halved"></i>
+          STACKLY CORE
+        </span>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =======================================================
+       PREVIOUS PAGE SCRIPT
+  ======================================================== -->
+
+  <script>
+
+    (function () {
+
+      const backButton =
+        document.getElementById("backPrevious");
+
+
+      backButton.addEventListener(
+        "click",
+        function () {
+
+          /*
+            If there is browser history,
+            go to the previous page.
+
+            Otherwise,
+            return to Stackly Home.
+          */
+
+          if (window.history.length > 1) {
+
+            window.history.back();
+
+          } else {
+
+            window.location.href =
+              "ae_dashboard.html";
+
+          }
+
+        }
+      );
+
+    })();
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#050a07" name="theme-color"/>
+<meta content="STACKLY Sports Club — Train. Play. Win. Repeat." name="description"/>
+<title>Our Sports | STACKLY</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<style>
+        :root{
+            --green:#00D5FF;
+            --lime:#138CFF;
+            --lime-2:#b8ff00;
+            --dark:#050a07;
+            --dark-2:#09120c;
+            --dark-3:#071A2B;
+            --card:#0a130d;
+            --line:rgba(223,255,24,.20);
+            --white:#fff;
+            --muted:#aeb8b1;
+            --container:1380px;
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%;}
+        body{
+            font-family:"Inter",sans-serif;
+            background:var(--dark);
+            color:var(--white);
+            overflow-x:hidden;
+            line-height:1.6;
+        }
+        body.mobile-menu-open{
+            overflow:hidden !important;
+            height:100vh;
+            touch-action:none;
+            overscroll-behavior:none;
+        }
+        img{max-width:100%;display:block}
+        a{text-decoration:none;color:inherit}
+        button{font:inherit}
+        section{position:relative}
+        .container{width:min(var(--container),92%);margin:auto}
+        .section-pad{padding:105px 0}
+
+        /* ================= PRELOADER — PRESERVED FOUNDATION ================= */
+        #sports-preloader{
+            position:fixed;inset:0;z-index:99999;
+            display:flex;align-items:center;justify-content:center;
+            overflow:hidden;
+            background:
+                radial-gradient(circle at 50% 45%,rgba(33,243,107,.14),transparent 28%),
+                radial-gradient(circle at 50% 50%,rgba(223,255,24,.07),transparent 45%),
+                linear-gradient(135deg,#020603,#06111F 48%,#030805);
+            transition:opacity .75s ease,visibility .75s ease;
+        }
+        #sports-preloader.preloader-hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .preloader-noise{position:absolute;inset:0;opacity:.18;pointer-events:none;
+            background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+            background-size:42px 42px;
+            mask-image:radial-gradient(circle at center,#000,transparent 72%);
+        }
+        .stadium-lights{position:absolute;inset:0;pointer-events:none}
+        .stadium-lights:before,.stadium-lights:after{
+            content:"";position:absolute;top:50%;width:45vw;height:1px;
+            background:linear-gradient(90deg,transparent,var(--green),transparent);
+            box-shadow:0 -26px 0 rgba(33,243,107,.12),0 26px 0 rgba(223,255,24,.1);
+            animation:lightSweep 2.8s ease-in-out infinite;
+        }
+        .stadium-lights:before{right:50%;transform-origin:right}
+        .stadium-lights:after{left:50%;transform-origin:left;animation-delay:1.4s}
+        .sports-orbit{position:absolute;width:min(430px,76vw);aspect-ratio:1;border:1px solid rgba(33,243,107,.12);border-radius:50%;animation:orbitPulse 2.2s ease-in-out infinite}
+        .sports-orbit:before,.sports-orbit:after{content:"";position:absolute;inset:7%;border:1px solid rgba(223,255,24,.12);border-radius:50%}
+        .sports-orbit:after{inset:19%;border-color:rgba(33,243,107,.08)}
+        .preloader-core{position:relative;z-index:4;width:min(680px,92vw);display:flex;flex-direction:column;align-items:center;text-align:center}
+        .logo-stage{position:relative;width:min(440px,82vw);display:flex;align-items:center;justify-content:center;animation:logoEntrance 1s cubic-bezier(.16,1,.3,1) both}
+        .logo-stage:before{content:"";position:absolute;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(33,243,107,.2),rgba(33,243,107,.05) 42%,transparent 72%);filter:blur(12px);animation:logoGlow 1.8s ease-in-out infinite}
+        .logo-stage:after{content:"";position:absolute;width:86%;aspect-ratio:1;border-radius:50%;border:2px solid transparent;border-top-color:var(--green);border-right-color:var(--lime);filter:drop-shadow(0 0 9px rgba(33,243,107,.65));animation:spinRing 1.35s linear infinite}
+        .preloader-logo{position:relative;z-index:3;width:78%;max-height:260px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(33,243,107,.45)) drop-shadow(0 0 28px rgba(33,243,107,.22));animation:logoFloat 2.1s ease-in-out infinite}
+        .action-track{position:absolute;left:50%;bottom:-7%;width:92%;height:80px;transform:translateX(-50%);pointer-events:none}
+        .action-track span{position:absolute;display:block;height:2px;border-radius:999px;background:linear-gradient(90deg,transparent,var(--green),var(--lime),transparent);opacity:0;animation:actionStreak 1.65s linear infinite}
+        .action-track span:nth-child(1){width:28%;top:14px;left:-5%;animation-delay:.1s}
+        .action-track span:nth-child(2){width:38%;top:32px;right:-9%;animation-delay:.55s}
+        .action-track span:nth-child(3){width:22%;top:52px;left:8%;animation-delay:.95s}
+        .action-track span:nth-child(4){width:30%;top:67px;right:12%;animation-delay:1.2s}
+        .sports-ball{position:absolute;z-index:5;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:900;color:#06111F;background:linear-gradient(135deg,var(--lime),var(--green));box-shadow:0 0 14px rgba(33,243,107,.55)}
+        .ball-one{top:13%;left:8%;animation:ballKickOne 2.5s ease-in-out infinite}
+        .ball-two{right:8%;bottom:17%;width:25px;height:25px;animation:ballKickTwo 2.8s ease-in-out infinite}
+        .loading-copy{margin-top:25px;animation:copyEntrance .9s .25s cubic-bezier(.16,1,.3,1) both}
+        .loading-title{font-family:"Barlow Condensed",sans-serif;font-size:clamp(23px,4vw,34px);font-weight:800;letter-spacing:.22em;text-transform:uppercase}
+        .loading-title span{color:var(--lime)}
+        .loading-subtitle{margin-top:5px;font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.58)}
+        .loader-progress{width:min(310px,68vw);height:4px;margin:21px auto 0;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.09)}
+        .loader-progress span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--green),var(--lime));box-shadow:0 0 13px rgba(33,243,107,.75);animation:loadingProgress 2.35s cubic-bezier(.22,.61,.36,1) forwards}
+        .loading-status{margin-top:10px;font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.42);text-transform:uppercase}
+        .corner{position:absolute;width:42px;height:42px;border-color:rgba(33,243,107,.35);border-style:solid;z-index:2}
+        .corner-tl{top:28px;left:28px;border-width:1px 0 0 1px}.corner-tr{top:28px;right:28px;border-width:1px 1px 0 0}.corner-bl{bottom:28px;left:28px;border-width:0 0 1px 1px}.corner-br{bottom:28px;right:28px;border-width:0 1px 1px 0}
+
+        /* ================= HEADER ================= */
+        .header{
+            position:fixed;top:0;left:0;width:100%;z-index:5000;
+            height:84px;display:flex;align-items:center;
+            border-bottom:1px solid rgba(223,255,24,.08);
+            background:rgba(3,8,5,.72);
+            backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+            transition:.35s ease;
+        }
+        .header.scrolled{background:rgba(3,8,5,.96);box-shadow:0 10px 35px rgba(0,0,0,.3)}
+        .nav-wrap{width:min(1500px,92%);margin:auto;display:flex;align-items:center;gap:35px}
+        .brand{width:190px;flex:0 0 auto}
+        .brand img{width:100%;height:auto;object-fit:contain}
+        .nav{margin-left:auto;display:flex;align-items:center;gap:28px}
+        .nav a{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#dce2dd;position:relative;padding:31px 0}
+        .nav a:after{content:"";position:absolute;left:0;bottom:21px;width:0;height:2px;background:linear-gradient(90deg,var(--lime),var(--green));transition:.3s}
+        @media(min-width:1025px){.nav a:hover{color:var(--lime)}}
+        .nav a.active{color:var(--lime)}
+        @media(min-width:1025px){.nav a:hover:after{width:100%}}
+        .nav a.active:after{width:100%}
+        .join-btn,.outline-btn{
+            display:inline-flex;align-items:center;justify-content:center;gap:12px;
+            min-height:48px;padding:0 25px;border-radius:3px;
+            font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+            transition:.3s ease;cursor:pointer
+        }
+        .join-btn{background:linear-gradient(135deg,var(--lime),var(--green));color:#06111F;border:1px solid var(--lime);box-shadow:0 0 0 rgba(33,243,107,0)}
+        @media(min-width:1025px){.join-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(33,243,107,.25)}}
+        .outline-btn{border:1px solid rgba(223,255,24,.6);color:#fff;background:rgba(5,10,7,.35)}
+        @media(min-width:1025px){.outline-btn:hover{background:var(--lime);color:#06111F;transform:translateY(-3px)}}
+        .menu-toggle{display:none;margin-left:auto;width:46px;height:46px;border:1px solid rgba(223,255,24,.45);background:transparent;color:var(--lime);border-radius:3px;cursor:pointer}
+        .mobile-nav{display:none}
+
+        /* ================= HERO ================= */
+        .hero{
+            min-height:850px;display:flex;align-items:center;
+            padding:140px 0 100px;overflow:hidden;
+            background:
+                linear-gradient(90deg,rgba(3,8,5,.98) 0%,rgba(3,8,5,.88) 34%,rgba(3,8,5,.28) 67%,rgba(3,8,5,.58) 100%),
+                url("assets/images/background/09.webp") center/cover;
+        }
+        .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 48%,rgba(33,243,107,.18),transparent 26%),linear-gradient(135deg,transparent 65%,rgba(223,255,24,.12));pointer-events:none}
+        .hero:after{content:"";position:absolute;right:-7%;bottom:0;width:65%;height:7px;background:linear-gradient(90deg,transparent,var(--green),var(--lime));transform:skewX(-35deg);box-shadow:0 0 30px rgba(33,243,107,.45)}
+        .hero-content{position:relative;z-index:2;width:min(730px,100%)}
+        .eyebrow{font-family:"Barlow Condensed",sans-serif;font-size:17px;font-weight:700;letter-spacing:.15em;color:var(--lime);text-transform:uppercase;margin-bottom:15px}
+        .eyebrow:before{content:"/////";margin-right:12px;letter-spacing:-2px}
+        .hero h1{font-family:"Barlow Condensed",sans-serif;font-size:clamp(66px,8vw,125px);font-weight:900;line-height:.83;letter-spacing:.01em;text-transform:uppercase;font-style:italic}
+        .hero h1 span{display:block;color:var(--lime);text-shadow:0 0 30px rgba(223,255,24,.16)}
+        .hero-text{max-width:610px;margin:25px 0;color:#d5ddd7;font-size:16px}
+        .hero-actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:31px}
+        .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);max-width:700px;margin-top:35px;border:1px solid rgba(223,255,24,.28);background:rgba(3,8,5,.7);backdrop-filter:blur(8px)}
+        .hero-stat{text-align:center;padding:19px 10px;border-right:1px solid rgba(223,255,24,.18)}
+        .hero-stat:last-child{border-right:0}
+        .hero-stat i{color:var(--lime);font-size:20px}
+        .hero-stat strong{display:block;font-family:"Barlow Condensed",sans-serif;font-size:34px;line-height:1;color:var(--lime);margin-top:4px}
+        .hero-stat small{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#cbd3cd}
+
+        /* ================= SECTION COMMON ================= */
+        .section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:42px}
+        .section-tag{font-family:"Barlow Condensed",sans-serif;color:var(--lime);font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+        .section-tag:before{content:"/////";margin-right:10px}
+        .section-title{font-family:"Barlow Condensed",sans-serif;font-size:clamp(42px,5vw,67px);font-weight:900;line-height:.95;text-transform:uppercase;font-style:italic}
+        .section-title span{color:var(--lime)}
+        .section-copy{max-width:600px;color:var(--muted);font-size:14px}
+
+        /* ================= SPORTS ================= */
+        .sports-section{background:linear-gradient(180deg,#050a07,#08100b)}
+        .sports-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+        .sport-card{height:270px;position:relative;overflow:hidden;border:1px solid rgba(223,255,24,.22);background:#0b140e;transition:.4s ease}
+        .sport-card:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(2,6,4,.95) 100%);z-index:1}
+        .sport-card img{width:100%;height:100%;object-fit:cover;transition:.55s ease;filter:saturate(.95)}
+        @media(min-width:1025px){.sport-card:hover{transform:translateY(-7px);border-color:var(--lime);box-shadow:0 18px 35px rgba(0,0,0,.35)}}
+        @media(min-width:1025px){.sport-card:hover img{transform:scale(1.1);filter:saturate(1.2)}}
+        .sport-info{position:absolute;z-index:2;left:18px;right:15px;bottom:17px}
+        .sport-icon{width:35px;height:35px;display:grid;place-items:center;background:var(--lime);color:#06111F;clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%);margin-bottom:12px}
+        .sport-info h3{font-family:"Barlow Condensed",sans-serif;font-size:25px;text-transform:uppercase}
+        .sport-info a{font-size:10px;font-weight:800;color:var(--lime);text-transform:uppercase;letter-spacing:.05em}
+
+        /* ================= ABOUT ================= */
+        .about-section{background:#060c08}
+        .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}
+        .about-visual{position:relative;min-height:490px}
+        .about-main{width:78%;height:480px;object-fit:cover;border:1px solid rgba(223,255,24,.3)}
+        .about-strip{position:absolute;right:0;bottom:25px;width:48%;height:175px;object-fit:cover;border:5px solid #060c08}
+        .about-badge{position:absolute;left:8%;bottom:38px;width:105px;height:105px;display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,var(--lime),var(--green));color:#06111F;clip-path:polygon(50% 0,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%)}
+        .about-badge strong{font-family:"Barlow Condensed";font-size:34px;line-height:.8}
+        .about-badge span{font-size:9px;font-weight:900;text-transform:uppercase}
+        .about-content h2{margin:8px 0 23px}
+        .about-content>p{color:var(--muted);font-size:15px}
+        .feature-list{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin:32px 0}
+        .feature{display:flex;gap:13px}
+        .feature i{color:var(--lime);font-size:21px;margin-top:3px}
+        .feature h4{font-family:"Barlow Condensed";font-size:21px;text-transform:uppercase}
+        .feature p{font-size:11px;color:#849087;margin-top:2px}
+
+        /* ================= EVENTS ================= */
+        .events-section{background:#07100a}
+        .events-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
+        .event-card{border:1px solid rgba(223,255,24,.23);background:linear-gradient(180deg,#0b150e,#060b08);overflow:hidden;transition:.35s}
+        @media(min-width:1025px){.event-card:hover{transform:translateY(-6px);border-color:var(--lime)}}
+        .event-image{height:205px;position:relative;overflow:hidden}
+        .event-image img{width:100%;height:100%;object-fit:cover;transition:.5s}
+        @media(min-width:1025px){.event-card:hover .event-image img{transform:scale(1.08)}}
+        .event-date{position:absolute;top:13px;left:13px;background:var(--lime);color:#06111F;width:53px;height:53px;display:grid;place-items:center;text-align:center;font-family:"Barlow Condensed";font-weight:900;line-height:.8}
+        .event-date strong{font-size:23px}.event-date span{font-size:9px}
+        .event-body{padding:20px}
+        .event-body h3{font-family:"Barlow Condensed";font-size:24px;text-transform:uppercase}
+        .event-meta{font-size:10px;color:#a8b1aa;margin-top:10px;display:grid;gap:6px}
+        .event-meta i{color:var(--lime);width:15px}
+
+        /* ================= ACHIEVEMENTS ================= */
+        .achievements{background:#050a07;padding:35px 0}
+        .achievement-box{display:grid;grid-template-columns:1.15fr 2fr;border:1px solid rgba(223,255,24,.18);background:linear-gradient(100deg,#0b160e,#07100a)}
+        .trophy-image{min-height:290px;background:url("assets/images/background/10.webp") center/cover;position:relative}
+        .trophy-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,10,6,.05),rgba(4,10,6,.85))}
+        .achievement-stats{display:grid;grid-template-columns:repeat(4,1fr);align-items:center}
+        .achievement-stat{text-align:center;padding:20px 10px;border-right:1px solid rgba(223,255,24,.12)}
+        .achievement-stat i{font-size:25px;color:var(--lime)}
+        .achievement-stat strong{display:block;color:var(--lime);font-family:"Barlow Condensed";font-size:46px;line-height:1}
+        .achievement-stat span{font-size:9px;text-transform:uppercase;color:#c5cec7;font-weight:700}
+
+        /* ================= GALLERY ================= */
+        .gallery-section{background:#070e09}
+        .gallery-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+        .gallery-item{height:260px;overflow:hidden;position:relative;border:1px solid rgba(223,255,24,.14)}
+        .gallery-item:nth-child(2),.gallery-item:nth-child(4){height:310px;margin-top:-25px}
+        .gallery-item img{width:100%;height:100%;object-fit:cover;transition:.5s}
+        .gallery-item:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(3,8,5,.85));opacity:.7}
+        @media(min-width:1025px){.gallery-item:hover img{transform:scale(1.1)}}
+        .gallery-caption{position:absolute;z-index:2;left:15px;bottom:14px;font-family:"Barlow Condensed";font-size:20px;text-transform:uppercase;color:var(--lime)}
+
+        /* ================= TESTIMONIAL ================= */
+        .testimonial-section{background:#050a07}
+        .testimonial-wrap{border:1px solid rgba(223,255,24,.17);padding:45px;background:radial-gradient(circle at center,rgba(33,243,107,.06),transparent 60%)}
+        .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .testimonial{padding:28px;border:1px solid rgba(223,255,24,.14);background:rgba(9,19,12,.72);position:relative}
+        .testimonial:before{content:"“";position:absolute;right:20px;top:0;font-family:Georgia;font-size:90px;color:rgba(223,255,24,.1)}
+        .member{display:flex;align-items:center;gap:13px;margin-bottom:20px}
+        .member img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--lime)}
+        .member h4{font-family:"Barlow Condensed";font-size:20px;text-transform:uppercase}
+        .member small{font-size:9px;color:var(--lime);text-transform:uppercase}
+        .stars{color:var(--lime);font-size:11px;letter-spacing:2px;margin-bottom:15px}
+        .testimonial p{font-size:12px;color:#aeb8b0;line-height:1.8}
+
+        /* ================= CTA ================= */
+        .cta-section{min-height:390px;display:flex;align-items:center;overflow:hidden;
+            background:linear-gradient(90deg,rgba(4,10,6,.96),rgba(4,10,6,.45),rgba(4,10,6,.9)),
+            url("assets/images/background/11.webp") center/cover}
+        .cta-section:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(33,243,107,.2),transparent 38%)}
+        .cta-content{position:relative;z-index:2;text-align:center;width:100%}
+        .cta-content h2{font-family:"Barlow Condensed";font-size:clamp(48px,6vw,80px);line-height:.9;font-style:italic;text-transform:uppercase}
+        .cta-content h2 span{color:var(--lime)}
+        .cta-content p{margin:17px auto 25px;color:#d1d8d3;font-size:14px}
+
+        /* ================= PARTNERS ================= */
+        .partners{background:#050a07;border-top:1px solid rgba(223,255,24,.1);border-bottom:1px solid rgba(223,255,24,.1);padding:38px 0}
+        .partner-row{display:flex;justify-content:space-between;align-items:center;gap:25px;flex-wrap:wrap}
+        .partner{font-size:22px;font-weight:900;letter-spacing:-.05em;color:#b8bdb9;opacity:.72;transition:.3s}
+        @media(min-width:1025px){.partner:hover{color:var(--lime);opacity:1}}
+
+        /* ================= FOOTER — PREMIUM 4-COLUMN SPORTS LAYOUT ================= */
+        footer{background:#090b09;padding-top:68px;border-top:1px solid rgba(223,255,24,.08)}
+        .footer-main{display:grid;grid-template-columns:1.35fr .78fr .95fr 1.35fr;gap:70px;padding-bottom:48px}
+        .footer-brand img{width:255px;max-width:100%;height:auto;object-fit:contain}
+        .footer-logo-link{display:inline-block;line-height:0}
+        .footer-logo-link img{transition:transform .3s ease,filter .3s ease}
+        @media(min-width:1025px){.footer-logo-link:hover img{transform:translateY(-2px);filter:brightness(1.08) drop-shadow(0 7px 18px rgba(33,243,107,.12))}}
+        .footer-brand p{font-size:14px;line-height:1.8;color:#858d87;max-width:455px;margin:24px 0 27px}
+        .footer-accent{width:63px;height:3px;background:linear-gradient(90deg,var(--lime),var(--green));margin-bottom:25px}
+        .socials{display:flex;gap:11px}
+        .socials a{width:54px;height:54px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);border-radius:50%;color:#aeb5b0;font-size:17px;transition:.35s ease;background:rgba(255,255,255,.01)}
+        @media(min-width:1025px){.socials a:hover{background:var(--lime);border-color:var(--lime);color:#06111F;transform:translateY(-5px);box-shadow:0 10px 25px rgba(33,243,107,.2)}}
+        footer h3{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.15;color:#f5f6f4;font-weight:700;margin:0 0 25px;position:relative;padding-top:12px}
+        footer h3:before{content:"";position:absolute;left:0;top:0;width:38px;height:2px;background:var(--lime)}
+        footer ul{list-style:none;display:grid;gap:13px}
+        footer li,footer li a{font-size:14px;line-height:1.6;color:#858d87;transition:.25s ease}
+        @media(min-width:1025px){footer li a:hover{color:var(--lime);padding-left:4px}}
+        .newsletter-box{border:1px solid rgba(255,255,255,.10);background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:31px 32px 33px;min-height:300px;position:relative}
+        .newsletter-box:before{content:"";position:absolute;left:0;top:0;width:64px;height:2px;background:var(--lime)}
+        .newsletter-box h3{padding-top:0;margin-bottom:24px}
+        .newsletter-box h3:before{display:none}
+        .newsletter-box p{font-size:14px;line-height:1.85;color:#858d87;margin-bottom:25px}
+        .newsletter-form{display:flex;flex-direction:column;gap:12px}
+        .newsletter-form input{width:100%;min-width:0;height:58px;border:1px solid rgba(255,255,255,.11);background:rgba(3,7,4,.65);color:#fff;padding:0 17px;font:inherit;font-size:13px;outline:none;transition:.25s}
+        .newsletter-form input:focus{border-color:rgba(223,255,24,.55);box-shadow:0 0 0 3px rgba(223,255,24,.06)}
+        .newsletter-form input::placeholder{color:#646c67}
+        .newsletter-form button{height:58px;width:100%;padding:0 24px;border:1px solid var(--lime);background:var(--lime);color:#06111F;font-size:13px;font-weight:800;cursor:pointer;transition:.3s;white-space:nowrap}
+        @media(min-width:1025px){.newsletter-form button:hover{background:var(--green);border-color:var(--green);transform:translateY(-2px);box-shadow:0 10px 24px rgba(33,243,107,.18)}}
+        .footer-contact{border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.07);padding:29px 0}
+        .contact-strip{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:35px;align-items:center}
+        .contact-item{display:flex;align-items:center;gap:18px;min-width:0}
+        .contact-item i{font-size:18px;color:var(--lime);width:22px;text-align:center;flex:0 0 22px}
+        .contact-item span{font-size:14px;color:#858d87;line-height:1.55;overflow-wrap:anywhere}
+        .contact-item a{color:#858d87;transition:.25s}@media(min-width:1025px){.contact-item a:hover{color:var(--lime)}}
+        .footer-bottom{padding:24px 0 27px}
+        .copyright{border:0;padding:0;font-size:12px;color:#59625c;display:flex;align-items:center;justify-content:space-between;gap:20px}
+        .footer-legal{display:flex;gap:32px}.footer-legal a{color:#68716b;transition:.25s}@media(min-width:1025px){.footer-legal a:hover{color:var(--lime)}}
+        .back-top{width:69px;height:69px;display:grid;place-items:center;background:var(--lime);color:#06111F;border-radius:50%;position:fixed;right:28px;bottom:28px;z-index:1000;opacity:0;visibility:hidden;transform:translateY(15px);transition:.3s;font-size:25px;box-shadow:0 10px 30px rgba(0,0,0,.35);cursor:pointer;pointer-events:none;touch-action:manipulation}
+        .back-top.show{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+        @media(min-width:1025px){.back-top:hover{background:var(--green);transform:translateY(-4px)}}
+
+
+        /* =========================================================
+           ABOUT PAGE — FRESH SPORTS CLUB EXPERIENCE
+           Desktop hover effects are intentionally isolated to:
+           1025px+ + hover-capable fine pointer.
+           ========================================================= */
+
+        .about-hero{
+            min-height:820px;
+            position:relative;
+            display:flex;
+            align-items:center;
+            overflow:hidden;
+            background:#030805;
+        }
+        .about-hero-bg{
+            position:absolute;
+            inset:0;
+            background:
+                linear-gradient(90deg,rgba(3,8,5,.98) 0%,rgba(3,8,5,.91) 35%,rgba(3,8,5,.45) 65%,rgba(3,8,5,.72) 100%),
+                url("assets/images/background/12.webp") center/cover;
+        }
+        .about-hero-bg:after{
+            content:"";
+            position:absolute;inset:0;
+            background:radial-gradient(circle at 72% 46%,rgba(33,243,107,.17),transparent 28%),
+                       linear-gradient(135deg,transparent 60%,rgba(223,255,24,.10));
+        }
+        .about-hero-inner{
+            position:relative;z-index:2;
+            display:grid;grid-template-columns:1.25fr .75fr;
+            align-items:center;gap:45px;
+            padding-top:90px;
+        }
+        .about-hero-copy{max-width:780px}
+        .about-hero h1{
+            font-family:"Barlow Condensed",sans-serif;
+            font-size:clamp(70px,9vw,138px);
+            line-height:.78;font-weight:900;
+            font-style:italic;text-transform:uppercase;
+            letter-spacing:.005em;
+        }
+        .about-hero h1 span{color:var(--lime);text-shadow:0 0 30px rgba(223,255,24,.15)}
+        .about-hero-copy>p{
+            max-width:650px;color:#d1dad3;font-size:16px;
+            line-height:1.8;margin:28px 0 0;
+        }
+        .about-hero-actions{display:flex;gap:15px;flex-wrap:wrap;margin-top:32px}
+        .about-hero-mark{
+            justify-self:end;width:min(390px,32vw);aspect-ratio:1;
+            position:relative;display:grid;place-items:center;
+        }
+        .hero-ring{
+            position:absolute;border-radius:50%;
+            border:1px solid rgba(223,255,24,.22);
+        }
+        .hero-ring-one{inset:3%;border-right-color:var(--lime);transform:rotate(-22deg)}
+        .hero-ring-two{inset:14%;border-left-color:var(--green);transform:rotate(38deg)}
+        .hero-number{
+            position:relative;z-index:2;
+            font-family:"Barlow Condensed",sans-serif;
+            font-size:clamp(110px,13vw,190px);font-weight:900;
+            line-height:.72;color:var(--lime);
+            text-shadow:0 0 28px rgba(223,255,24,.18);
+        }
+        .hero-number span{font-size:.45em;vertical-align:top}
+        .hero-number-label{
+            position:absolute;bottom:15%;left:50%;transform:translateX(-50%);
+            width:180px;text-align:center;
+            font-family:"Barlow Condensed",sans-serif;
+            font-weight:800;font-size:13px;letter-spacing:.16em;
+            color:#d8dfda;
+        }
+        .story-section{background:#060c08}
+        .story-grid{
+            display:grid;grid-template-columns:.95fr 1.05fr;
+            gap:75px;align-items:center;
+        }
+        .story-visual{position:relative;min-height:560px}
+        .story-main-img{
+            width:83%;height:540px;object-fit:cover;
+            border:1px solid rgba(223,255,24,.27);
+        }
+        .story-mini-card{
+            position:absolute;right:0;bottom:42px;
+            width:270px;padding:20px 22px;
+            display:flex;align-items:center;gap:14px;
+            background:rgba(5,10,7,.94);
+            border:1px solid rgba(223,255,24,.35);
+        }
+        .story-mini-card i{font-size:28px;color:var(--lime)}
+        .story-mini-card strong,.story-mini-card span{
+            display:block;font-family:"Barlow Condensed",sans-serif;
+            text-transform:uppercase;line-height:1;
+        }
+        .story-mini-card strong{font-size:23px}
+        .story-mini-card span{font-size:12px;color:#8e9991;margin-top:5px;letter-spacing:.08em}
+        .story-corner{
+            position:absolute;left:-14px;bottom:14px;width:82px;height:82px;
+            border-left:3px solid var(--lime);border-bottom:3px solid var(--lime);
+        }
+        .story-copy>p{color:var(--muted);font-size:14px;line-height:1.9}
+        .story-copy .lead-copy{font-size:17px;color:#d5ddd8;margin-bottom:15px}
+        .story-points{display:grid;gap:18px;margin-top:30px}
+        .story-point{
+            display:grid;grid-template-columns:43px 1fr;gap:14px;
+            padding:15px 0;border-top:1px solid rgba(255,255,255,.08);
+        }
+        .point-no{
+            font-family:"Barlow Condensed",sans-serif;font-size:14px;
+            font-weight:900;color:var(--lime);padding-top:3px;
+        }
+        .story-point h3{
+            font-family:"Barlow Condensed",sans-serif;font-size:22px;
+            line-height:1;text-transform:uppercase;
+        }
+        .story-point p{font-size:11px;color:#849087;margin-top:5px}
+
+        .philosophy-section{
+            background:linear-gradient(180deg,#07100a,#050a07);
+            padding:95px 0;
+        }
+        .philosophy-grid{
+            display:grid;grid-template-columns:.8fr 1.2fr;
+            gap:65px;align-items:start;
+        }
+        .philosophy-intro{position:sticky;top:110px}
+        .philosophy-intro p{color:var(--muted);font-size:14px;line-height:1.9;max-width:420px;margin-top:20px}
+        .philosophy-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .philosophy-card{
+            min-height:240px;padding:26px 24px;
+            border:1px solid rgba(223,255,24,.15);
+            background:rgba(9,19,12,.7);
+            position:relative;overflow:hidden;
+            transition:.35s ease;
+        }
+        .philosophy-index{
+            position:absolute;right:18px;top:15px;
+            font-family:"Barlow Condensed",sans-serif;font-size:12px;
+            color:rgba(223,255,24,.48);font-weight:800;
+        }
+        .philosophy-card i{font-size:27px;color:var(--lime);margin:35px 0 20px}
+        .philosophy-card h3,.facility-overlay h3,.value-card h3{
+            font-family:"Barlow Condensed",sans-serif;
+            font-size:27px;line-height:.95;text-transform:uppercase;
+        }
+        .philosophy-card p{font-size:11px;color:#89938c;line-height:1.7;margin-top:10px}
+
+        .journey-section{background:#050a07}
+        .journey-head{align-items:end}
+        .journey-layout{
+            display:grid;grid-template-columns:1fr 1fr;
+            gap:60px;align-items:stretch;
+        }
+        .journey-image{position:relative;min-height:570px;overflow:hidden;border:1px solid rgba(223,255,24,.22)}
+        .journey-image img{width:100%;height:100%;object-fit:cover}
+        .journey-image:after{
+            content:"";position:absolute;inset:0;
+            background:linear-gradient(180deg,transparent 40%,rgba(2,7,4,.92) 100%);
+        }
+        .journey-image-label{
+            position:absolute;z-index:2;left:25px;bottom:25px;
+            font-family:"Barlow Condensed",sans-serif;font-size:15px;
+            font-weight:800;letter-spacing:.14em;color:var(--lime);
+        }
+        .journey-list{display:grid;align-content:center}
+        .journey-item{
+            display:grid;grid-template-columns:55px 1fr;gap:18px;
+            padding:24px 0;border-bottom:1px solid rgba(255,255,255,.09);
+        }
+        .journey-item>span{
+            font-family:"Barlow Condensed",sans-serif;
+            color:var(--lime);font-size:20px;font-weight:900;
+        }
+        .journey-item h3{
+            font-family:"Barlow Condensed",sans-serif;font-size:25px;
+            line-height:1;text-transform:uppercase;
+        }
+        .journey-item p{color:#87918a;font-size:12px;line-height:1.7;margin-top:7px}
+
+        .facilities-section{background:#07100a}
+        .facility-grid{
+            display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:14px;
+        }
+        .facility-card{
+            height:470px;position:relative;overflow:hidden;
+            border:1px solid rgba(223,255,24,.17);background:#0a130d;
+        }
+        .facility-card img{width:100%;height:100%;object-fit:cover;transition:.55s ease;filter:saturate(.88)}
+        .facility-card:after{
+            content:"";position:absolute;inset:0;
+            background:linear-gradient(180deg,transparent 30%,rgba(2,7,4,.96) 100%);
+        }
+        .facility-overlay{position:absolute;z-index:2;left:23px;right:20px;bottom:23px}
+        .facility-overlay>span{
+            font-family:"Barlow Condensed",sans-serif;font-size:11px;
+            color:var(--lime);letter-spacing:.13em;font-weight:800;
+        }
+        .facility-overlay h3{margin-top:8px}
+        .facility-overlay p{font-size:11px;color:#aab3ad;line-height:1.65;margin-top:8px;max-width:360px}
+
+        .people-section{background:#060c08}
+        .people-grid{
+            display:grid;grid-template-columns:1fr 1fr;
+            gap:70px;align-items:center;
+        }
+        .people-copy>p{color:var(--muted);font-size:14px;line-height:1.9;margin:22px 0}
+        .coach-values{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin:28px 0}
+        .coach-values div{display:flex;gap:10px;align-items:center;color:#c4ccc7;font-size:12px}
+        .coach-values i{color:var(--lime)}
+        .coach-gallery{min-height:560px;position:relative}
+        .coach-image{position:absolute;overflow:hidden;border:1px solid rgba(223,255,24,.23)}
+        .coach-image img{width:100%;height:100%;object-fit:cover;transition:.5s ease}
+        .coach-image-main{left:0;top:0;width:74%;height:470px}
+        .coach-image-small{right:0;bottom:0;width:46%;height:230px;border:6px solid #060c08}
+        .coach-stamp{
+            position:absolute;right:39%;top:34px;
+            width:94px;height:94px;border-radius:50%;
+            background:var(--lime);color:#06111F;
+            display:flex;flex-direction:column;align-items:center;justify-content:center;
+            text-align:center;transform:rotate(9deg);
+        }
+        .coach-stamp i{font-size:18px}
+        .coach-stamp strong{font-family:"Barlow Condensed";font-size:12px;line-height:.9;margin-top:4px}
+
+        /* ================= LEADERSHIP ================= */
+        .leadership-section{background:linear-gradient(180deg,#060c08,#08110b)}
+        .leadership-head{align-items:end}
+        .leaders-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+        .leader-card{
+            border:1px solid rgba(223,255,24,.17);
+            background:linear-gradient(180deg,#0a150d,#060c08);
+            overflow:hidden;
+            position:relative;
+            transition:.35s ease;
+        }
+        .leader-photo{height:385px;position:relative;overflow:hidden;background:#09120c}
+        .leader-photo:after{
+            content:"";position:absolute;inset:0;
+            background:linear-gradient(180deg,transparent 48%,rgba(3,8,5,.92) 100%);
+        }
+        .leader-photo img{width:100%;height:100%;object-fit:cover;transition:.55s ease;filter:saturate(.88)}
+        .leader-number{
+            position:absolute;z-index:2;right:16px;top:16px;
+            width:42px;height:42px;display:grid;place-items:center;
+            border:1px solid rgba(223,255,24,.55);background:rgba(3,8,5,.7);
+            color:var(--lime);font-family:"Barlow Condensed";font-weight:900;font-size:16px;
+        }
+        .leader-info{padding:24px 23px 25px}
+        .leader-role{font-size:9px;font-weight:900;letter-spacing:.14em;color:var(--lime);text-transform:uppercase}
+        .leader-info h3{font-family:"Barlow Condensed";font-size:31px;line-height:.95;text-transform:uppercase;margin:8px 0 12px}
+        .leader-info p{font-size:11px;line-height:1.75;color:#8f9992;min-height:58px}
+        .leader-meta{display:flex;align-items:center;gap:9px;margin-top:20px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);font-size:8px;font-weight:800;letter-spacing:.08em;color:#bac2bd}
+        .leader-meta i{color:var(--lime);font-size:13px}
+        .leadership-note{margin-top:22px;padding:22px 28px;border-left:3px solid var(--lime);background:rgba(223,255,24,.025);display:flex;align-items:center;gap:18px}
+        .leadership-note i{font-size:23px;color:var(--lime)}
+        .leadership-note p{font-family:"Barlow Condensed";font-size:20px;text-transform:uppercase;letter-spacing:.02em;color:#d0d7d2}
+
+        .about-numbers{
+            padding:62px 0;background:#050a07;
+            border-top:1px solid rgba(223,255,24,.12);
+            border-bottom:1px solid rgba(223,255,24,.12);
+        }
+        .about-numbers .container{
+            display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center;
+        }
+        .numbers-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+        .number-item{text-align:center;padding:15px 12px;border-right:1px solid rgba(223,255,24,.13)}
+        .number-item:last-child{border-right:0}
+        .number-item i{font-size:23px;color:var(--lime)}
+        .number-item strong{
+            display:block;font-family:"Barlow Condensed",sans-serif;
+            color:var(--lime);font-size:43px;line-height:1;margin-top:7px;
+        }
+        .number-item span{display:block;color:#b9c2bc;font-size:9px;font-weight:800;letter-spacing:.06em;margin-top:6px}
+
+        .values-section{background:#07100a}
+        .values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+        .value-card{
+            min-height:280px;padding:28px 24px;
+            border:1px solid rgba(223,255,24,.15);
+            background:linear-gradient(145deg,#0a150d,#07100a);
+            position:relative;overflow:hidden;transition:.35s ease;
+        }
+        .value-card>span{
+            position:absolute;right:20px;top:18px;
+            font-family:"Barlow Condensed";font-size:12px;
+            color:rgba(223,255,24,.45);font-weight:800;
+        }
+        .value-card i{font-size:28px;color:var(--lime);margin:42px 0 20px}
+        .value-card p{font-size:11px;color:#8a958d;line-height:1.75;margin-top:10px}
+
+        .about-cta{
+            min-height:500px;display:flex;align-items:center;
+            position:relative;overflow:hidden;text-align:center;
+        }
+        .about-cta-bg{
+            position:absolute;inset:0;
+            background:
+                linear-gradient(90deg,rgba(3,8,5,.93),rgba(3,8,5,.55),rgba(3,8,5,.93)),
+                url("assets/images/background/13.webp") center/cover;
+        }
+        .about-cta-bg:after{
+            content:"";position:absolute;inset:0;
+            background:radial-gradient(circle at center,rgba(33,243,107,.18),transparent 38%);
+        }
+        .about-cta-inner{position:relative;z-index:2}
+        .about-cta-inner .section-tag{margin-bottom:14px}
+        .about-cta h2{
+            font-family:"Barlow Condensed",sans-serif;
+            font-size:clamp(58px,8vw,105px);line-height:.82;
+            font-style:italic;font-weight:900;text-transform:uppercase;
+        }
+        .about-cta h2 span{color:var(--lime)}
+        .about-cta p{font-size:14px;color:#cdd5d0;margin:20px auto 27px}
+        .about-cta-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+        /* ---------- ABOUT DESKTOP HOVER ONLY ---------- */
+        @media (min-width:1025px) and (hover:hover) and (pointer:fine){
+            .philosophy-card,.value-card{transition:transform .35s ease,border-color .35s ease,background .35s ease,box-shadow .35s ease}
+            .philosophy-card:hover,.value-card:hover{
+                transform:translateY(-8px);
+                border-color:rgba(223,255,24,.46);
+                background:linear-gradient(145deg,#0e1b12,#08120b);
+                box-shadow:0 16px 35px rgba(0,0,0,.30);
+            }
+            .philosophy-card i,.value-card i{display:inline-block;transition:transform .3s ease,filter .3s ease}
+            .philosophy-card:hover i,.value-card:hover i{
+                transform:scale(1.14);
+                filter:drop-shadow(0 0 8px rgba(223,255,24,.45));
+            }
+            .facility-card img{transition:transform .6s ease,filter .45s ease}
+            .facility-card:hover img{transform:scale(1.08);filter:saturate(1.12)}
+            .facility-card .facility-overlay{transition:transform .35s ease}
+            .facility-card:hover .facility-overlay{transform:translateY(-6px)}
+            .journey-image img{transition:transform .6s ease,filter .45s ease}
+            .journey-image:hover img{transform:scale(1.045);filter:saturate(1.08)}
+
+            /* ATHLETE JOURNEY STEPS — DESKTOP ONLY */
+            .journey-item{
+                position:relative;
+                padding:24px 14px 24px 0;
+                transition:transform .3s ease,background .3s ease,
+                           border-color .3s ease;
+            }
+            .journey-item:hover{
+                transform:translateX(8px);
+                background:linear-gradient(90deg,rgba(223,255,24,.045),transparent);
+                border-bottom-color:rgba(223,255,24,.35);
+            }
+            .journey-item>span{
+                transition:transform .3s ease,color .3s ease,text-shadow .3s ease;
+            }
+            .journey-item:hover>span{
+                transform:scale(1.15);
+                color:#fff;
+                text-shadow:0 0 12px rgba(223,255,24,.45);
+            }
+            .journey-item h3{transition:color .3s ease}
+            .journey-item:hover h3{color:var(--lime)}
+
+            .story-main-img,.coach-image img{transition:transform .55s ease,filter .45s ease}
+            .story-main-img:hover,.coach-image:hover img{transform:scale(1.035);filter:saturate(1.08)}
+            .story-mini-card{transition:transform .3s ease,border-color .3s ease}
+            .story-mini-card:hover{transform:translateY(-6px);border-color:var(--lime)}
+            .story-point{transition:transform .3s ease,border-color .3s ease}
+            .story-point:hover{transform:translateX(6px);border-color:rgba(223,255,24,.3)}
+            .story-point:hover .point-no{color:#fff}
+            .number-item{transition:transform .3s ease,background .3s ease}
+            .number-item:hover{transform:translateY(-5px);background:rgba(223,255,24,.035)}
+            .number-item:hover i{transform:scale(1.15);text-shadow:0 0 13px rgba(223,255,24,.5)}
+            .number-item i{display:inline-block;transition:transform .3s ease,text-shadow .3s ease}
+            .leader-card{transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease,background .35s ease}
+            .leader-card:hover{transform:translateY(-8px);border-color:rgba(223,255,24,.46);box-shadow:0 18px 38px rgba(0,0,0,.32);background:linear-gradient(145deg,#0e1b12,#08120b)}
+            .leader-card:hover .leader-photo img{transform:scale(1.06);filter:saturate(1.10)}
+            .leader-number{transition:background .3s ease,color .3s ease,transform .3s ease}
+            .leader-card:hover .leader-number{background:var(--lime);color:#06111F;transform:rotate(5deg)}
+            .leader-meta i{transition:transform .3s ease,text-shadow .3s ease}
+            .leader-card:hover .leader-meta i{transform:scale(1.15);text-shadow:0 0 9px rgba(223,255,24,.5)}
+
+            /* COACHING VALUES — DESKTOP ONLY */
+            .coach-values div{
+                padding:9px 10px;
+                border:1px solid transparent;
+                transition:transform .3s ease,background .3s ease,
+                           border-color .3s ease,color .3s ease;
+            }
+            .coach-values div:hover{
+                transform:translateX(6px);
+                background:rgba(223,255,24,.035);
+                border-color:rgba(223,255,24,.22);
+                color:#fff;
+            }
+            .coach-values i{transition:transform .3s ease,text-shadow .3s ease}
+            .coach-values div:hover i{
+                transform:scale(1.15);
+                text-shadow:0 0 9px rgba(223,255,24,.5);
+            }
+            .hero-ring-one{animation:aboutRingSpin 14s linear infinite}
+            .hero-ring-two{animation:aboutRingSpinReverse 11s linear infinite}
+        }
+        @keyframes aboutRingSpin{to{transform:rotate(338deg)}}
+        @keyframes aboutRingSpinReverse{to{transform:rotate(-322deg)}}
+
+        /* ---------- MOBILE/TABLET: NO ABOUT HOVER ---------- */
+
+        @media(max-width:1024px){
+            .about-hero{min-height:760px}
+            .about-hero-inner{grid-template-columns:1fr;gap:20px;padding-top:95px}
+            .about-hero-copy{max-width:700px}
+            .about-hero-mark{display:none}
+            .story-grid,.people-grid{grid-template-columns:1fr;gap:45px}
+            .story-visual{min-height:470px}
+            .story-main-img{height:450px}
+            .philosophy-grid{grid-template-columns:1fr;gap:35px}
+            .philosophy-intro{position:static}
+            .journey-layout{grid-template-columns:1fr;gap:35px}
+            .journey-image{min-height:430px}
+            .facility-grid{grid-template-columns:1fr 1fr}
+            .facility-large{grid-column:1 / -1}
+            .people-grid{gap:35px}
+            .coach-gallery{min-height:500px}
+            .leaders-grid{grid-template-columns:1fr 1fr}
+            .leader-card:last-child{grid-column:1 / -1;max-width:calc(50% - 9px);margin:auto;width:100%}
+            .about-numbers .container{grid-template-columns:1fr;gap:30px}
+            .values-grid{grid-template-columns:repeat(2,1fr)}
+        }
+
+        @media(max-width:1024px){
+            .leader-card:hover,.philosophy-card:hover,.value-card:hover,.facility-card:hover,
+            .journey-image:hover,.story-main-img:hover,.coach-image:hover,
+            .story-mini-card:hover,.story-point:hover,.number-item:hover{
+                transform:none !important;
+                box-shadow:none !important;
+                border-color:inherit !important;
+            }
+            .facility-card:hover img,.journey-image:hover img,
+            .story-main-img:hover,.coach-image:hover img{
+                transform:none !important;
+                filter:none !important;
+            }
+            .leader-card:hover .leader-photo img,.leader-card:hover .leader-number,.leader-card:hover .leader-meta i,
+            .philosophy-card:hover i,.value-card:hover i,
+            .number-item:hover i{
+                transform:none !important;
+                filter:none !important;
+                text-shadow:none !important;
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media(max-width:1250px){
+            .nav{gap:18px}.nav-wrap{gap:20px}.brand{width:165px}
+            .sports-grid{grid-template-columns:repeat(3,1fr)}
+            .events-grid{grid-template-columns:repeat(2,1fr)}
+            .footer-grid{grid-template-columns:1.5fr repeat(2,1fr) 1.3fr}
+            .footer-grid>.footer-col:last-child{grid-column:span 2}
+        }
+        @media(max-width:1024px){
+            .header{height:76px}
+            .nav,.header>.nav-wrap>.join-btn{display:none}
+            .menu-toggle{display:block}
+
+            /* Compact mobile menu: fixed to the viewport, no internal scrolling */
+            /* Full mobile overlay: no page content visible and no menu scrolling */
+            body.mobile-menu-open::after{
+                content:"";
+                position:fixed;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                background:#020704;
+                z-index:4985;
+                pointer-events:auto;
+            }
+            .mobile-nav{
+                position:fixed;
+                top:76px;
+                left:0;
+                right:0;
+                bottom:0;
+                width:100%;
+                height:calc(100dvh - 76px);
+                min-height:calc(100vh - 76px);
+                max-height:none;
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content:center;
+                padding:20px 18px;
+                background:linear-gradient(180deg,#07100a 0%,#020704 100%);
+                border:1px solid rgba(223,255,24,.22);
+                border-radius:6px;
+                transform:translateY(-18px);
+                opacity:0;
+                pointer-events:none;
+                visibility:hidden;
+                transition:transform .32s ease,opacity .22s ease,visibility .32s ease;
+                z-index:5100;
+                overflow:hidden;
+                box-shadow:0 20px 50px rgba(0,0,0,.70);
+            }
+            .mobile-nav.active{
+                transform:translateY(0);
+                opacity:1;
+                visibility:visible;
+                pointer-events:auto;
+            }
+            .mobile-nav a{
+                width:min(460px,100%);
+                padding:12px 10px;
+                border-bottom:1px solid rgba(255,255,255,.07);
+                font-size:15px;
+                line-height:1.15;
+                text-transform:uppercase;
+                font-weight:800;
+                letter-spacing:.045em;
+                text-align:center;
+                color:#f5f7f5;
+                transition:none;
+                flex:0 0 auto;
+            }
+            .mobile-nav a:hover,
+            .mobile-nav a:focus-visible{
+                color:#f5f7f5;
+                border-bottom-color:rgba(255,255,255,.07);
+            }
+            .mobile-nav a.active{
+                color:var(--lime);
+                border-bottom-color:rgba(223,255,24,.45);
+                background:linear-gradient(90deg,transparent,rgba(223,255,24,.08),transparent);
+                text-shadow:0 0 12px rgba(223,255,24,.16);
+            }
+            .mobile-nav .join-btn{
+                margin-top:16px;
+                width:min(460px,100%);
+                min-height:52px;
+                justify-content:center;
+                flex:0 0 auto;
+            }
+            .hero{min-height:780px}
+            .about-grid{grid-template-columns:1fr;gap:35px}.about-visual{min-height:450px}
+            .achievement-box{grid-template-columns:1fr}.trophy-image{min-height:240px}
+            .footer-grid{grid-template-columns:repeat(2,1fr)}.footer-brand{grid-column:span 2}
+            .footer-grid>.footer-col:last-child{grid-column:span 1}
+        }
+
+        @media(max-width:768px){
+            .about-hero{min-height:720px}
+            .about-hero h1{font-size:clamp(62px,16vw,92px)}
+            .about-hero-copy>p{font-size:14px;line-height:1.7}
+            .about-hero-actions{flex-direction:column}
+            .about-hero-actions a{width:100%}
+            .story-visual{min-height:405px}
+            .story-main-img{width:88%;height:390px}
+            .story-mini-card{width:235px;right:0;bottom:18px;padding:16px}
+            .story-corner{left:0;bottom:5px;width:60px;height:60px}
+            .philosophy-cards{grid-template-columns:1fr}
+            .philosophy-card{min-height:210px}
+            .journey-image{min-height:360px}
+            .facility-grid{grid-template-columns:1fr}
+            .facility-large{grid-column:auto}
+            .facility-card{height:390px}
+            .coach-gallery{min-height:430px}
+            .coach-image-main{height:365px;width:78%}
+            .coach-image-small{height:175px;width:50%}
+            .coach-stamp{right:34%;width:78px;height:78px}
+            .leaders-grid{grid-template-columns:1fr}
+            .leader-card:last-child{grid-column:auto;max-width:none}
+            .leader-photo{height:350px}
+            .leadership-note{align-items:flex-start}
+            .numbers-grid{grid-template-columns:1fr 1fr}
+            .number-item:nth-child(2){border-right:0}
+            .number-item:nth-child(-n+2){border-bottom:1px solid rgba(223,255,24,.13)}
+            .values-grid{grid-template-columns:1fr}
+            .value-card{min-height:220px}
+            .about-cta{min-height:440px}
+            .about-cta h2{font-size:clamp(52px,14vw,82px)}
+            .about-cta-actions{flex-direction:column}
+            .about-cta-actions a{width:100%}
+        }
+
+        @media(max-width:768px){
+            .section-pad{padding:78px 0}
+            html,body{overflow-x:hidden!important;max-width:100%;}
+            .header{max-width:100vw;overflow:visible;}
+            .nav-wrap{width:92%;max-width:100%;min-width:0;}
+            .mobile-nav{left:0;right:0;top:76px;bottom:0;width:100%;height:calc(100dvh - 76px);max-width:none;}
+
+            .hero{padding:125px 0 70px;min-height:760px;background-position:65% center;max-width:100vw;}
+            .hero-content{width:100%}
+            .hero h1{font-size:clamp(58px,15vw,92px)}
+            .hero-text{font-size:14px}
+            .hero-stats{grid-template-columns:repeat(2,1fr)}
+            .hero-stat:nth-child(2){border-right:0}
+            .hero-stat:nth-child(-n+2){border-bottom:1px solid rgba(223,255,24,.18)}
+            .section-head{display:block}.section-copy{margin-top:14px}
+            .sports-grid{grid-template-columns:repeat(2,1fr)}
+            .sport-card{height:255px}
+            .feature-list{grid-template-columns:1fr}
+            .achievement-stats{grid-template-columns:repeat(2,1fr)}
+            .achievement-stat:nth-child(odd){border-right:1px solid rgba(223,255,24,.12)}
+            .achievement-stat:nth-child(-n+2){border-bottom:1px solid rgba(223,255,24,.12)}
+            .gallery-grid{grid-template-columns:repeat(2,1fr)}
+            .gallery-item,.gallery-item:nth-child(2),.gallery-item:nth-child(4){height:245px;margin-top:0}
+            .gallery-item:last-child{grid-column:span 2}
+            .testimonials{grid-template-columns:1fr}
+            .testimonial-wrap{padding:25px}
+            .partner-row{justify-content:center}
+        }
+        @media(max-width:520px){
+            .container{width:90%;max-width:100%;min-width:0}
+            .brand{width:145px;max-width:55%;}
+            .hero-content{max-width:100%;min-width:0}
+            .hero h1,.hero-text{overflow-wrap:anywhere}
+            .hero-stats{max-width:100%;min-width:0}
+            .hero-actions{flex-direction:column}.hero-actions a{width:100%}
+            .hero-stats{margin-top:27px}
+            .hero-stat{padding:15px 5px}.hero-stat strong{font-size:29px}
+            .sports-grid{grid-template-columns:1fr}
+            .sport-card{height:310px}
+            .events-grid{grid-template-columns:1fr}
+            .event-image{height:225px}
+            .about-main{width:100%;height:390px}.about-strip{width:55%;height:140px}
+            .about-badge{left:4%;bottom:18px;width:90px;height:90px}
+            .achievement-stats{grid-template-columns:1fr 1fr}
+            .gallery-grid{grid-template-columns:1fr 1fr;gap:6px}
+            .gallery-item,.gallery-item:nth-child(2),.gallery-item:nth-child(4){height:210px}
+            .footer-grid{grid-template-columns:1fr}.footer-brand{grid-column:auto}
+            .copyright{display:block;text-align:center}.copyright span{display:block;margin-top:8px}
+            .corner{width:27px;height:27px}.corner-tl,.corner-tr{top:18px}.corner-bl,.corner-br{bottom:18px}.corner-tl,.corner-bl{left:18px}.corner-tr,.corner-br{right:18px}
+            .loading-subtitle{font-size:8px;letter-spacing:.28em}
+        }
+        @media(max-width:360px){
+            .mobile-nav{padding:14px 14px;}
+            .mobile-nav a{padding:9px 8px;font-size:14px;}
+            .mobile-nav .join-btn{margin-top:11px;min-height:48px;}
+            .hero h1{font-size:52px}.hero-stat strong{font-size:25px}.hero-stat small{font-size:8px}
+            .gallery-grid{grid-template-columns:1fr;min-width:0}.gallery-item:last-child{grid-column:auto}
+            section,header,main,footer{max-width:100%;min-width:0;}
+        }
+
+        @keyframes logoEntrance{from{opacity:0;transform:translateY(28px) scale(.78)}to{opacity:1;transform:none}}
+        @keyframes copyEntrance{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+        @keyframes logoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.015)}}
+        @keyframes logoGlow{0%,100%{opacity:.65;transform:scale(.92)}50%{opacity:1;transform:scale(1.08)}}
+        @keyframes spinRing{to{transform:rotate(360deg)}}
+        @keyframes orbitPulse{0%,100%{transform:scale(.94);opacity:.55}50%{transform:scale(1.03);opacity:1}}
+        @keyframes actionStreak{0%{opacity:0;transform:translateX(-50px) scaleX(.35)}20%{opacity:.9}100%{opacity:0;transform:translateX(150px) scaleX(1.1)}}
+        @keyframes ballKickOne{0%,100%{transform:translate(0) rotate(0)}35%{transform:translate(36px,-18px) rotate(140deg)}65%{transform:translate(66px,22px) rotate(270deg)}}
+        @keyframes ballKickTwo{0%,100%{transform:translate(0) rotate(0)}45%{transform:translate(-48px,-32px) rotate(180deg)}72%{transform:translate(-75px,4px) rotate(290deg)}}
+        @keyframes lightSweep{0%,100%{opacity:.2;transform:scaleX(.65)}50%{opacity:1;transform:scaleX(1)}}
+        @keyframes loadingProgress{0%{width:0}75%{width:82%}100%{width:100%}}
+
+        @media(max-width:1024px){
+            .footer-main{grid-template-columns:1.25fr 1fr 1fr;gap:40px}
+            .newsletter-box{grid-column:1 / -1;min-height:auto}
+            .contact-strip{grid-template-columns:1fr 1fr}
+            .contact-item:first-child{grid-column:1 / -1}
+        }
+
+        @media(max-width:768px){
+            footer{padding-top:55px;text-align:center}
+            .footer-main{grid-template-columns:1fr 1fr;gap:42px 30px;text-align:center}
+            .footer-brand,.newsletter-box{grid-column:1 / -1}
+            .footer-brand{display:flex;flex-direction:column;align-items:center}
+            .footer-brand img{width:220px}
+            .footer-brand p{max-width:560px;text-align:center}
+            .footer-accent{margin-left:auto;margin-right:auto}
+            .socials{justify-content:center}
+            .footer-col{text-align:center}
+            .footer-col h3:before{left:50%;transform:translateX(-50%)}
+            .footer-col ul{justify-items:center}
+            .newsletter-box{text-align:center}
+            .newsletter-box h3:before{display:none}
+            .newsletter-form{max-width:620px;margin:0 auto}
+            .contact-strip{grid-template-columns:1fr;gap:20px;text-align:center}
+            .contact-item{justify-content:center;text-align:center}
+            .contact-item:first-child{grid-column:auto}
+            .contact-item span{max-width:100%}
+            .copyright{display:flex;text-align:center;align-items:center;flex-direction:column;gap:12px}
+            .footer-legal{justify-content:center;gap:20px;flex-wrap:wrap}
+            .back-top{width:58px;height:58px;right:18px;bottom:18px;font-size:21px}
+        }
+
+        @media(max-width:520px){
+            .mobile-nav{padding:20px 18px;}
+            .mobile-nav a{padding:11px 10px;font-size:15px;}
+            .mobile-nav .join-btn{margin-top:14px;min-height:50px;}
+            .footer-main{grid-template-columns:1fr;gap:38px}
+            .footer-brand,.newsletter-box{grid-column:auto}
+            .footer-brand img{width:205px}
+            .socials{gap:8px}
+            .socials a{width:47px;height:47px;font-size:15px}
+            footer h3{font-size:25px}
+            .newsletter-box{padding:26px 22px 27px}
+            .newsletter-form{flex-direction:column}
+            .newsletter-form input,.newsletter-form button{width:100%}
+            .contact-item{align-items:flex-start}
+            .contact-item i{margin-top:3px}
+            .copyright{font-size:11px}
+            .footer-legal{gap:15px;font-size:11px}
+        }
+
+
+
+        /* =========================================================
+           STACKLY SPORTS — DESKTOP HOVER EFFECTS ONLY
+           ---------------------------------------------------------
+           These effects are intentionally limited to real desktop:
+           1025px+ with mouse/pointer support.
+           Mobile + tablet remain completely static.
+           ========================================================= */
+        @media (min-width:1025px) and (hover:hover) and (pointer:fine){
+
+            /* ---------- HERO STAT BOXES ---------- */
+            .hero-stat{
+                position:relative;
+                transition:background .3s ease, transform .3s ease,
+                           box-shadow .3s ease;
+            }
+            .hero-stat:hover{
+                background:rgba(223,255,24,.055);
+                transform:translateY(-5px);
+                box-shadow:inset 0 -2px 0 var(--lime);
+            }
+            .hero-stat i{
+                display:inline-block;
+                transition:transform .3s ease, text-shadow .3s ease;
+            }
+            .hero-stat:hover i{
+                transform:scale(1.15) translateY(-2px);
+                text-shadow:0 0 14px rgba(223,255,24,.55);
+            }
+            .hero-stat strong{
+                transition:transform .3s ease, text-shadow .3s ease;
+            }
+            .hero-stat:hover strong{
+                transform:scale(1.04);
+                text-shadow:0 0 18px rgba(223,255,24,.35);
+            }
+
+            /* ---------- ABOUT / FEATURE ITEMS ---------- */
+            .feature{
+                position:relative;
+                padding:10px 12px;
+                margin:-10px -12px;
+                border:1px solid transparent;
+                transition:background .3s ease, border-color .3s ease,
+                           transform .3s ease;
+            }
+            .feature:hover{
+                background:rgba(223,255,24,.035);
+                border-color:rgba(223,255,24,.20);
+                transform:translateX(6px);
+            }
+            .feature i{
+                transition:transform .3s ease, filter .3s ease;
+            }
+            .feature:hover i{
+                transform:scale(1.15);
+                filter:drop-shadow(0 0 7px rgba(223,255,24,.5));
+            }
+            .feature h4{
+                transition:color .3s ease;
+            }
+            .feature:hover h4{
+                color:var(--lime);
+            }
+
+            /* ---------- ABOUT IMAGES ---------- */
+            .about-main,
+            .about-strip{
+                transition:transform .5s ease, filter .4s ease,
+                           box-shadow .4s ease;
+            }
+            .about-main:hover{
+                transform:scale(1.025);
+                filter:saturate(1.08);
+                box-shadow:0 18px 38px rgba(0,0,0,.35);
+            }
+            .about-strip:hover{
+                transform:translate(-5px,-5px) scale(1.035);
+                filter:saturate(1.10);
+                box-shadow:0 16px 30px rgba(0,0,0,.38);
+            }
+
+            /* ---------- 15+ YEARS BADGE ---------- */
+            .about-badge{
+                transition:transform .35s ease, filter .35s ease,
+                           box-shadow .35s ease;
+            }
+            .about-badge:hover{
+                transform:scale(1.08) rotate(-2deg);
+                filter:brightness(1.08);
+                box-shadow:0 12px 28px rgba(223,255,24,.20);
+            }
+
+            /* ---------- ACHIEVEMENT STAT BOXES ---------- */
+            .achievement-stat{
+                position:relative;
+                transition:background .3s ease, transform .3s ease,
+                           box-shadow .3s ease;
+            }
+            .achievement-stat:hover{
+                background:rgba(223,255,24,.035);
+                transform:translateY(-6px);
+                box-shadow:inset 0 -2px 0 var(--lime);
+            }
+            .achievement-stat i{
+                display:inline-block;
+                transition:transform .3s ease, text-shadow .3s ease;
+            }
+            .achievement-stat:hover i{
+                transform:scale(1.16);
+                text-shadow:0 0 14px rgba(223,255,24,.50);
+            }
+            .achievement-stat strong{
+                transition:transform .3s ease, text-shadow .3s ease;
+            }
+            .achievement-stat:hover strong{
+                transform:scale(1.04);
+                text-shadow:0 0 18px rgba(223,255,24,.35);
+            }
+
+            /* ---------- TESTIMONIAL CARDS ---------- */
+            .testimonial{
+                transition:transform .35s ease, border-color .35s ease,
+                           background .35s ease, box-shadow .35s ease;
+            }
+            .testimonial:hover{
+                transform:translateY(-8px);
+                border-color:rgba(223,255,24,.42);
+                background:rgba(12,24,15,.92);
+                box-shadow:0 18px 38px rgba(0,0,0,.30);
+            }
+            .testimonial .member img{
+                transition:transform .35s ease, filter .35s ease;
+            }
+            .testimonial:hover .member img{
+                transform:scale(1.08);
+                filter:saturate(1.12);
+            }
+            .testimonial .stars{
+                transition:letter-spacing .3s ease, text-shadow .3s ease;
+            }
+            .testimonial:hover .stars{
+                letter-spacing:3px;
+                text-shadow:0 0 12px rgba(223,255,24,.40);
+            }
+        }
+
+        @media (min-width:768px){
+        /* =========================================================
+           RETURN FROM 404: TARGETED HOVER RESET (DESKTOP ONLY)
+           Browsers can restore the pointer over the exact CTA that was
+           clicked before navigating to 404.html. Keep that element and
+           its hoverable parent neutral until the pointer actually leaves
+           it or the user starts interacting elsewhere.
+           ========================================================= */
+        body.stackly-404-return .stackly-reset-hover{
+            transform:none !important;
+            box-shadow:none !important;
+            filter:none !important;
+            text-shadow:none !important;
+        }
+
+        body.stackly-404-return .join-btn.stackly-reset-hover{
+            background:linear-gradient(135deg,var(--lime),var(--green)) !important;
+            border-color:var(--lime) !important;
+            color:#06111F !important;
+        }
+
+        body.stackly-404-return .outline-btn.stackly-reset-hover{
+            background:rgba(5,10,7,.35) !important;
+            border-color:rgba(223,255,24,.6) !important;
+            color:#fff !important;
+        }
+
+        body.stackly-404-return .sport-card.stackly-reset-hover{
+            border-color:rgba(223,255,24,.22) !important;
+        }
+        body.stackly-404-return .sport-card.stackly-reset-hover img,
+        body.stackly-404-return .event-card.stackly-reset-hover .event-image img,
+        body.stackly-404-return .gallery-item.stackly-reset-hover img{
+            transform:none !important;
+            filter:saturate(.95) !important;
+        }
+
+        body.stackly-404-return .event-card.stackly-reset-hover{
+            border-color:rgba(223,255,24,.23) !important;
+        }
+
+        body.stackly-404-return .socials a.stackly-reset-hover{
+            background:rgba(255,255,255,.01) !important;
+            border-color:rgba(255,255,255,.12) !important;
+            color:#aeb5b0 !important;
+        }
+
+        body.stackly-404-return .footer-logo-link.stackly-reset-hover img{
+            filter:none !important;
+            transform:none !important;
+        }
+
+        body.stackly-404-return .partner.stackly-reset-hover{
+            color:#b8bdb9 !important;
+            opacity:.72 !important;
+        }
+
+        body.stackly-404-return footer li a.stackly-reset-hover,
+        body.stackly-404-return .contact-item a.stackly-reset-hover{
+            color:#858d87 !important;
+            padding-left:0 !important;
+        }
+        }
+
+        /* =========================================================
+           REAL MOBILE ONLY — 767px AND BELOW
+           IMPORTANT: desktop hover effects remain untouched.
+           ========================================================= */
+        @media (max-width:767px){
+            /* No sticky hover visual after a tap/back navigation. */
+            a:hover,
+            button:hover,
+            .join-btn:hover,
+            .outline-btn:hover,
+            .nav a:hover,
+            .mobile-nav a:hover,
+            .sport-card:hover,
+            .sport-card:hover img,
+            .event-card:hover,
+            .event-card:hover .event-image img,
+            .gallery-item:hover,
+            .gallery-item:hover img,
+            .socials a:hover,
+            .footer-logo-link:hover,
+            .footer-logo-link:hover img,
+            .partner:hover,
+            footer li a:hover,
+            .contact-item a:hover,
+            .footer-legal a:hover,
+            .back-top:hover,
+            .newsletter-form button:hover{
+                transform:none !important;
+                box-shadow:none !important;
+                filter:none !important;
+                text-shadow:none !important;
+            }
+
+            /* Restore exact normal appearance. */
+            .join-btn:hover,
+            .newsletter-form button:hover{
+                background:linear-gradient(135deg,var(--lime),var(--green)) !important;
+                border-color:var(--lime) !important;
+                color:#06111F !important;
+            }
+
+            .outline-btn:hover{
+                background:rgba(5,10,7,.35) !important;
+                border-color:rgba(223,255,24,.6) !important;
+                color:#fff !important;
+            }
+
+            .nav a:hover,
+            .mobile-nav a:hover{
+                color:#dce2dd !important;
+                background:transparent !important;
+                text-shadow:none !important;
+            }
+
+            .sport-card:hover{
+                border-color:rgba(223,255,24,.22) !important;
+            }
+
+            .event-card:hover{
+                border-color:rgba(223,255,24,.23) !important;
+            }
+
+            .sport-card:hover img,
+            .event-card:hover .event-image img,
+            .gallery-item:hover img{
+                transform:none !important;
+                filter:saturate(.95) !important;
+            }
+
+            .socials a:hover{
+                background:rgba(255,255,255,.01) !important;
+                border-color:rgba(255,255,255,.12) !important;
+                color:#aeb5b0 !important;
+            }
+
+            .partner:hover{
+                color:#b8bdb9 !important;
+                opacity:.72 !important;
+            }
+
+            footer li a:hover,
+            .contact-item a:hover,
+            .footer-legal a:hover{
+                color:#858d87 !important;
+                padding-left:0 !important;
+            }
+
+            .footer-logo-link:hover img{
+                transform:none !important;
+                filter:none !important;
+            }
+
+            .back-top:hover{
+                background:var(--lime) !important;
+                color:#06111F !important;
+            }
+
+            a,button,.sport-card,.event-card,.gallery-item,
+            .socials a,.footer-logo-link,.partner,.back-top{
+                -webkit-tap-highlight-color:transparent !important;
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce){
+            html{scroll-behavior:auto}
+            *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+        }
+
+
+
+        /* =========================================================
+           SPORTS PAGE — FRESH SPORTS CLUB CONTENT
+           Hover effects are DESKTOP ONLY.
+           Mobile/tablet stay static.
+           ========================================================= */
+
+        .sports-page-hero{
+            min-height:850px;
+            position:relative;
+            display:flex;
+            align-items:center;
+            overflow:hidden;
+            background:#030805;
+        }
+        .sports-page-hero-bg{
+            position:absolute;
+            inset:0;
+            background:
+                linear-gradient(90deg,rgba(3,8,5,.98) 0%,rgba(3,8,5,.88) 35%,rgba(3,8,5,.40) 65%,rgba(3,8,5,.78) 100%),
+                url("assets/images/background/14.webp") center/cover;
+        }
+        .sports-page-hero-bg:after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:radial-gradient(circle at 73% 50%,rgba(33,243,107,.17),transparent 29%),
+                       linear-gradient(135deg,transparent 60%,rgba(223,255,24,.10));
+        }
+        .sports-page-hero-inner{
+            position:relative;
+            z-index:2;
+            display:grid;
+            grid-template-columns:1.25fr .75fr;
+            align-items:center;
+            gap:55px;
+            padding-top:80px;
+        }
+        .sports-page-hero-copy{max-width:790px}
+        .sports-page-hero h1{
+            font-family:"Barlow Condensed",sans-serif;
+            font-size:clamp(70px,9vw,138px);
+            line-height:.78;
+            font-weight:900;
+            font-style:italic;
+            text-transform:uppercase;
+        }
+        .sports-page-hero h1 span{color:var(--lime);text-shadow:0 0 30px rgba(223,255,24,.16)}
+        .sports-page-hero-copy>p{
+            max-width:650px;
+            color:#d1dad3;
+            font-size:16px;
+            line-height:1.8;
+            margin-top:28px;
+        }
+        .sports-page-actions{display:flex;gap:15px;flex-wrap:wrap;margin-top:32px}
+        .sports-page-actions.center{justify-content:center}
+        .sports-hero-panel{
+            width:min(390px,100%);
+            justify-self:end;
+            padding:30px;
+            border:1px solid rgba(223,255,24,.28);
+            background:rgba(4,10,6,.70);
+            backdrop-filter:blur(10px);
+            position:relative;
+            overflow:hidden;
+        }
+        .sports-hero-panel:before{
+            content:"";
+            position:absolute;
+            width:160px;height:160px;
+            right:-65px;top:-65px;
+            border:1px solid rgba(223,255,24,.25);
+            border-radius:50%;
+        }
+        .hero-panel-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            color:#bfc8c2;
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:.15em;
+        }
+        .hero-panel-top i{color:var(--lime);font-size:19px}
+        .hero-panel-number{
+            font-family:"Barlow Condensed";
+            font-size:150px;
+            font-weight:900;
+            line-height:.78;
+            color:var(--lime);
+            margin:35px 0 18px;
+        }
+        .hero-panel-title{
+            font-family:"Barlow Condensed";
+            font-size:37px;
+            font-weight:900;
+            line-height:.9;
+            font-style:italic;
+            text-transform:uppercase;
+        }
+        .hero-panel-title span{color:var(--lime)}
+        .hero-panel-line{
+            width:100%;
+            height:2px;
+            margin:25px 0 18px;
+            background:linear-gradient(90deg,var(--lime),transparent);
+        }
+        .sports-hero-panel p{color:#89948c;font-size:11px;line-height:1.8}
+
+        .sports-intro{background:#050a07}
+        .sports-intro-head{margin-bottom:40px}
+        .sports-detail-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:16px;
+        }
+        .sports-detail-card{
+            display:flex;
+            flex-direction:column;
+            min-width:0;
+            border:1px solid rgba(223,255,24,.16);
+            background:linear-gradient(180deg,#0b150e,#060c08);
+            overflow:hidden;
+            transition:.35s ease;
+        }
+        .sports-detail-image{
+            height:245px;
+            position:relative;
+            overflow:hidden;
+            background:#09120c;
+        }
+        .sports-detail-image:after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:linear-gradient(180deg,transparent 40%,rgba(3,8,5,.82) 100%);
+        }
+        .sports-detail-image img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            filter:saturate(.88);
+            transition:.55s ease;
+        }
+        .sport-number{
+            position:absolute;
+            z-index:2;
+            left:15px;
+            top:15px;
+            width:42px;
+            height:42px;
+            display:grid;
+            place-items:center;
+            background:var(--lime);
+            color:#06111F;
+            font-family:"Barlow Condensed";
+            font-weight:900;
+            font-size:16px;
+        }
+        .sports-detail-body{
+            padding:22px 20px 23px;
+            display:flex;
+            flex-direction:column;
+            flex:1;
+        }
+        .sport-label{
+            color:var(--lime);
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:.14em;
+        }
+        .sports-detail-body h3{
+            font-family:"Barlow Condensed";
+            font-size:31px;
+            line-height:.95;
+            text-transform:uppercase;
+            margin-top:8px;
+        }
+        .sports-detail-body p{
+            color:#8d9890;
+            font-size:11px;
+            line-height:1.75;
+            margin:12px 0 17px;
+        }
+        .sport-tags{
+            display:flex;
+            flex-wrap:wrap;
+            gap:6px;
+            margin-top:auto;
+        }
+        .sport-tags span{
+            padding:5px 8px;
+            border:1px solid rgba(223,255,24,.14);
+            color:#aeb7b1;
+            font-size:8px;
+            text-transform:uppercase;
+            letter-spacing:.04em;
+        }
+        .sport-link{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            margin-top:18px;
+            padding-top:13px;
+            border-top:1px solid rgba(255,255,255,.08);
+            color:var(--lime);
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:.10em;
+        }
+
+        .training-method{background:#07100a}
+        .method-grid{
+            display:grid;
+            grid-template-columns:.8fr 1.2fr;
+            gap:75px;
+            align-items:center;
+        }
+        .method-copy>p{
+            color:var(--muted);
+            font-size:14px;
+            line-height:1.9;
+            max-width:500px;
+            margin:20px 0 28px;
+        }
+        .method-steps{border-top:1px solid rgba(255,255,255,.08)}
+        .method-step{
+            display:grid;
+            grid-template-columns:50px 1fr 25px;
+            gap:17px;
+            align-items:center;
+            padding:24px 12px 24px 0;
+            border-bottom:1px solid rgba(255,255,255,.08);
+            transition:.3s ease;
+        }
+        .method-step>span{
+            font-family:"Barlow Condensed";
+            color:var(--lime);
+            font-size:20px;
+            font-weight:900;
+        }
+        .method-step h3{
+            font-family:"Barlow Condensed";
+            font-size:26px;
+            line-height:1;
+            text-transform:uppercase;
+        }
+        .method-step p{
+            color:#849087;
+            font-size:11px;
+            line-height:1.7;
+            margin-top:6px;
+        }
+        .method-step>i{
+            color:#657067;
+            transition:.3s ease;
+        }
+
+        .performance-section{background:#050a07}
+        .performance-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+        }
+        .performance-card{
+            min-height:285px;
+            padding:27px 23px;
+            border:1px solid rgba(223,255,24,.15);
+            background:linear-gradient(145deg,#0a150d,#07100a);
+            position:relative;
+            overflow:hidden;
+            transition:.35s ease;
+        }
+        .performance-card>span{
+            position:absolute;
+            right:18px;
+            top:16px;
+            color:rgba(223,255,24,.42);
+            font-family:"Barlow Condensed";
+            font-size:12px;
+            font-weight:900;
+        }
+        .performance-icon{
+            width:53px;
+            height:53px;
+            display:grid;
+            place-items:center;
+            background:rgba(223,255,24,.09);
+            border:1px solid rgba(223,255,24,.25);
+            color:var(--lime);
+            font-size:20px;
+            margin-bottom:35px;
+            transition:.3s ease;
+        }
+        .performance-card h3{
+            font-family:"Barlow Condensed";
+            font-size:26px;
+            line-height:.95;
+            text-transform:uppercase;
+        }
+        .performance-card p{
+            color:#87918a;
+            font-size:11px;
+            line-height:1.75;
+            margin-top:11px;
+        }
+
+        .sports-page-cta{
+            min-height:520px;
+            display:flex;
+            align-items:center;
+            text-align:center;
+            position:relative;
+            overflow:hidden;
+        }
+        .sports-page-cta-bg{
+            position:absolute;
+            inset:0;
+            background:
+                linear-gradient(90deg,rgba(3,8,5,.94),rgba(3,8,5,.48),rgba(3,8,5,.92)),
+                url("assets/images/background/15.webp") center/cover;
+        }
+        .sports-page-cta-bg:after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:radial-gradient(circle at center,rgba(33,243,107,.17),transparent 38%);
+        }
+        .sports-page-cta-inner{position:relative;z-index:2;width:100%}
+        .sports-page-cta h2{
+            font-family:"Barlow Condensed";
+            font-size:clamp(60px,8vw,108px);
+            line-height:.80;
+            font-weight:900;
+            font-style:italic;
+            text-transform:uppercase;
+        }
+        .sports-page-cta h2 span{color:var(--lime)}
+        .sports-page-cta p{
+            color:#cbd4ce;
+            font-size:14px;
+            margin:20px auto 27px;
+        }
+
+        /* =========================================================
+           DESKTOP HOVER ONLY
+           1025px+ + real hover-capable fine pointer
+           ========================================================= */
+        @media (min-width:1025px) and (hover:hover) and (pointer:fine){
+
+            .sports-detail-card{
+                transition:transform .35s ease,border-color .35s ease,
+                           box-shadow .35s ease,background .35s ease;
+            }
+            .sports-detail-card:hover{
+                transform:translateY(-9px);
+                border-color:rgba(223,255,24,.50);
+                box-shadow:0 18px 38px rgba(0,0,0,.34);
+                background:linear-gradient(145deg,#0e1b12,#08120b);
+            }
+            .sports-detail-card:hover .sports-detail-image img{
+                transform:scale(1.09);
+                filter:saturate(1.14);
+            }
+            .sports-detail-card:hover .sport-number{
+                background:var(--green);
+                transform:rotate(4deg);
+            }
+            .sport-number{transition:transform .3s ease,background .3s ease}
+            .sports-detail-card:hover .sport-link{
+                letter-spacing:.14em;
+            }
+            .sport-link{transition:letter-spacing .3s ease}
+
+            .method-step:hover{
+                transform:translateX(8px);
+                background:linear-gradient(90deg,rgba(223,255,24,.045),transparent);
+                border-bottom-color:rgba(223,255,24,.32);
+            }
+            .method-step:hover>span{color:#fff}
+            .method-step:hover>i{
+                color:var(--lime);
+                transform:translateX(4px);
+            }
+
+            .performance-card:hover{
+                transform:translateY(-8px);
+                border-color:rgba(223,255,24,.46);
+                box-shadow:0 17px 35px rgba(0,0,0,.30);
+                background:linear-gradient(145deg,#0e1b12,#08120b);
+            }
+            .performance-card:hover .performance-icon{
+                background:var(--lime);
+                color:#06111F;
+                transform:scale(1.08);
+                box-shadow:0 0 18px rgba(223,255,24,.16);
+            }
+
+            .sports-hero-panel{
+                transition:transform .4s ease,border-color .4s ease,box-shadow .4s ease;
+            }
+            .sports-hero-panel:hover{
+                transform:translateY(-7px);
+                border-color:rgba(223,255,24,.48);
+                box-shadow:0 20px 45px rgba(0,0,0,.30);
+            }
+        }
+
+        /* 404 -> Back: keep desktop hover targets clean after return */
+        @media (min-width:1025px){
+            .sports-detail-card.stackly-reset-hover,
+            .method-step.stackly-reset-hover,
+            .performance-card.stackly-reset-hover,
+            .sports-hero-panel.stackly-reset-hover{
+                transform:none !important;
+                box-shadow:none !important;
+            }
+            .sports-detail-card.stackly-reset-hover{
+                border-color:rgba(223,255,24,.16) !important;
+                background:linear-gradient(180deg,#0b150e,#060c08) !important;
+            }
+            .sports-detail-card.stackly-reset-hover .sports-detail-image img{
+                transform:none !important;
+                filter:saturate(.88) !important;
+            }
+        }
+
+        /* =========================================================
+           TABLET + MOBILE — NO HOVER VISUAL EFFECTS
+           ========================================================= */
+        @media (max-width:1024px){
+            .sports-page-hero{min-height:760px}
+            .sports-page-hero-inner{
+                grid-template-columns:1fr;
+                gap:30px;
+                padding-top:90px;
+            }
+            .sports-hero-panel{
+                justify-self:start;
+                width:min(430px,100%);
+            }
+            .sports-detail-grid{grid-template-columns:repeat(2,1fr)}
+            .method-grid{grid-template-columns:1fr;gap:40px}
+            .performance-grid{grid-template-columns:repeat(2,1fr)}
+
+            .sports-detail-card:hover,
+            .method-step:hover,
+            .performance-card:hover,
+            .sports-hero-panel:hover{
+                transform:none !important;
+                box-shadow:none !important;
+            }
+            .sports-detail-card:hover{
+                border-color:rgba(223,255,24,.16) !important;
+                background:linear-gradient(180deg,#0b150e,#060c08) !important;
+            }
+            .sports-detail-card:hover .sports-detail-image img{
+                transform:none !important;
+                filter:saturate(.88) !important;
+            }
+            .sports-detail-card:hover .sport-number{
+                background:var(--lime) !important;
+                transform:none !important;
+            }
+            .method-step:hover{
+                background:transparent !important;
+                border-bottom-color:rgba(255,255,255,.08) !important;
+            }
+            .method-step:hover>i{
+                color:#657067 !important;
+                transform:none !important;
+            }
+            .performance-card:hover{
+                border-color:rgba(223,255,24,.15) !important;
+                background:linear-gradient(145deg,#0a150d,#07100a) !important;
+            }
+            .performance-card:hover .performance-icon{
+                background:rgba(223,255,24,.09) !important;
+                color:var(--lime) !important;
+                transform:none !important;
+                box-shadow:none !important;
+            }
+        }
+
+        @media(max-width:600px){
+            .sports-page-hero{min-height:720px}
+            .sports-page-hero h1{font-size:clamp(60px,18vw,88px)}
+            .sports-page-hero-copy>p{font-size:13px}
+            .sports-page-actions{
+                gap:10px;
+                width:100%;
+                align-items:center;
+            }
+            .sports-page-actions .join-btn,
+            .sports-page-actions .outline-btn{
+                width:90%;
+                max-width:430px;
+                margin-left:auto;
+                margin-right:auto;
+            }
+            .sports-hero-panel{display:none}
+            .sports-detail-grid{grid-template-columns:1fr}
+            .sports-detail-image{height:260px}
+            .method-step{grid-template-columns:40px 1fr 18px;padding:20px 5px 20px 0}
+            .method-step h3{font-size:23px}
+            .performance-grid{grid-template-columns:1fr}
+            .performance-card{min-height:230px}
+            .sports-page-cta{min-height:440px}
+            .sports-page-cta h2{font-size:clamp(53px,15vw,78px)}
+        }
+
+        @media(max-width:360px){
+            .sports-page-hero h1{font-size:56px}
+            .sports-detail-body{padding:19px 16px 20px}
+            .sports-detail-body h3{font-size:28px}
+            .sports-page-cta h2{font-size:50px}
+        }
+
+@media (min-width:1025px) and (hover:hover) and (pointer:fine){
+    .contact-item:first-child span{
+        transition:.25s ease;
+    }
+
+    .contact-item:first-child:hover span{
+        color:var(--lime);
+    }
+}        
+
+</style>
+</head>
+<body>
+<!-- ================= SPORTS PRELOADER ================= -->
+<div aria-label="Loading STACKLY Sports Club" id="sports-preloader" role="status">
+<div class="preloader-noise"></div>
+<div class="stadium-lights"></div>
+<div class="sports-orbit"></div>
+<span class="corner corner-tl"></span><span class="corner corner-tr"></span>
+<span class="corner corner-bl"></span><span class="corner corner-br"></span>
+<div class="sports-ball ball-one">S</div>
+<div class="sports-ball ball-two">S</div>
+<div class="preloader-core">
+<div class="logo-stage">
+<img alt="STACKLY Sports Club" class="preloader-logo" height="400" src="assets/images/logo/stackly_logo.webp" width="918"/>
+<div aria-hidden="true" class="action-track"><span></span><span></span><span></span><span></span></div>
+</div>
+<div class="loading-copy">
+<div class="loading-title"><span>STACKLY</span> SPORTS CLUB</div>
+<div class="loading-subtitle">Play · Train · Unite · Win</div>
+<div aria-hidden="true" class="loader-progress"><span></span></div>
+<div class="loading-status">Preparing the arena...</div>
+</div>
+</div>
+</div>
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+<div class="nav-wrap">
+<a aria-label="STACKLY Sports Club Home" class="brand" href="index.html">
+<img alt="STACKLY Sports Club" src="assets/images/logo/stackly_logo.webp"/>
+</a>
+<nav aria-label="Main navigation" class="nav">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a class="active" href="sports.html">Sports</a>
+<a href="packages.html">Packages</a>
+<a href="contact.html">Contact</a>
+</nav>
+<a class="join-btn" href="login.html">Login / Register</i></a>
+<button aria-expanded="false" aria-label="Open menu" class="menu-toggle" id="menuToggle">
+<i class="fa-solid fa-bars"></i>
+</button>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-nav" id="mobileNav">
+<a href="index.html">Home</a><a href="about.html">About</a><a class="active" href="sports.html">Sports</a>
+<a href="packages.html">Packages</a><a href="contact.html">Contact</a>
+<a class="join-btn" href="login.html">Login / Register</i></a>
+</nav>
+</header>
+
+<main id="sports-page">
+
+    <!-- ================= SPORTS HERO ================= -->
+    <section class="sports-page-hero">
+        <div class="sports-page-hero-bg"></div>
+        <div class="container sports-page-hero-inner">
+            <div class="sports-page-hero-copy" data-aos="fade-up">
+                <div class="eyebrow">STACKLY SPORTS CLUB</div>
+                <h1>TRAIN <span>YOUR SPORT.</span><br>OWN YOUR GAME.</h1>
+                <p>
+                    Discover the sports we train, the skills we build and the performance
+                    standards we expect. From first fundamentals to competition-ready
+                    execution, every pathway is designed to make athletes sharper,
+                    stronger and smarter.
+                </p>
+                <div class="sports-page-actions">
+                    <a class="join-btn" href="404.html">EXPLORE TRAINING <i class="fa-solid fa-arrow-right"></i></a>
+                    <a class="outline-btn" href="404.html">START YOUR PATH</a>
+                </div>
+            </div>
+
+            <div class="sports-hero-panel" data-aos="fade-left" data-aos-delay="180">
+                <div class="hero-panel-top">
+                    <span>OUR TRAINING FLOOR</span>
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="hero-panel-number">08</div>
+                <div class="hero-panel-title">SPORTS.<br><span>ONE STANDARD.</span></div>
+                <div class="hero-panel-line"></div>
+                <p>Multi-sport coaching built around movement, discipline and measurable progress.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SPORTS INTRO ================= -->
+    <section class="sports-intro section-pad">
+        <div class="container">
+            <div class="section-head sports-intro-head" data-aos="fade-up">
+                <div>
+                    <div class="section-tag">THE STACKLY ARENA</div>
+                    <h2 class="section-title">FIND YOUR <span>GAME.</span></h2>
+                </div>
+                <p class="section-copy">
+                    Every sport has a different rhythm. Our coaches adapt the training,
+                    conditioning and competition work to the demands of the athlete and
+                    the game.
+                </p>
+            </div>
+
+            <div class="sports-detail-grid">
+
+                <a class="sports-detail-card" href="404.html" data-aos="fade-up">
+                    <div class="sports-detail-image">
+                        <img src="assets/images/pictures/31.webp" alt="Subscription Plans">
+                        <span class="sport-number">01</span>
+                    </div>
+                    <div class="sports-detail-body">
+                        <div class="sport-label">TEAM SPORT</div>
+                        <h3>FOOTBALL</h3>
+                        <p>Build speed, first touch, passing intelligence, finishing and game awareness through structured pitch sessions.</p>
+                        <div class="sport-tags">
+                            <span>Ball Control</span><span>Speed</span><span>Tactics</span>
+                        </div>
+                        <span class="sport-link">VIEW TRAINING <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a class="sports-detail-card" href="404.html" data-aos="fade-up" data-aos-delay="80">
+                    <div class="sports-detail-image">
+                        <img src="assets/images/pictures/32.webp" alt="Cricket training">
+                        <span class="sport-number">02</span>
+                    </div>
+                    <div class="sports-detail-body">
+                        <div class="sport-label">BAT & BALL</div>
+                        <h3>CRICKET</h3>
+                        <p>Sharpen batting technique, bowling control, fielding reactions and match awareness with repetition-driven coaching.</p>
+                        <div class="sport-tags">
+                            <span>Batting</span><span>Bowling</span><span>Fielding</span>
+                        </div>
+                        <span class="sport-link">VIEW TRAINING <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a class="sports-detail-card" href="404.html" data-aos="fade-up" data-aos-delay="160">
+                    <div class="sports-detail-image">
+                        <img src="assets/images/pictures/33.webp" alt="Badminton training">
+                        <span class="sport-number">03</span>
+                    </div>
+                    <div class="sports-detail-body">
+                        <div class="sport-label">RACKET SPORT</div>
+                        <h3>BADMINTON</h3>
+                        <p>Develop explosive footwork, racket control, court coverage and shot selection for faster rallies and smarter play.</p>
+                        <div class="sport-tags">
+                            <span>Footwork</span><span>Rally Skills</span><span>Agility</span>
+                        </div>
+                        <span class="sport-link">VIEW TRAINING <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a class="sports-detail-card" href="404.html" data-aos="fade-up" data-aos-delay="240">
+                    <div class="sports-detail-image">
+                        <img src="assets/images/pictures/34.webp" alt="Tennis training">
+                        <span class="sport-number">04</span>
+                    </div>
+                    <div class="sports-detail-body">
+                        <div class="sport-label">RACKET SPORT</div>
+                        <h3>TENNIS</h3>
+                        <p>Improve serve mechanics, baseline consistency, movement patterns and point construction under pressure.</p>
+                        <div class="sport-tags">
+                            <span>Serve</span><span>Movement</span><span>Match Play</span>
+                        </div>
+                        <span class="sport-link">VIEW TRAINING <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a class="sports-detail-card" href="404.html" data-aos="fade-up" data-aos-delay="320">
+                    <div class="sports-detail-image">
+                        <img src="assets/images/pictures/35.webp" alt="Basketball training">
+                        <span class="sport-number">05</span>
+                    </div>
+                    <div class="sports-detail-body">
+                        <div class="sport-label">COURT SPORT</div>
+                        <h3>BASKETBALL</h3>
+                        <p>Train ball handling, shooting rhythm, defensive movement, decision-making and high-intensity court conditioning.</p>
+                        <div class="sport-tags">
+                            <span>Shooting</span><span>Defense</span><span>Conditioning</span>
+                        </div>
+                        <span class="sport-link">VIEW TRAINING <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a class="sports-detail-card" href="404.html" data-aos="fade-up" data-aos-delay="400">
+                    <div class="sports-detail-image">
+                        <img src="assets/images/pictures/36.webp" alt="Swimming training">
+                        <span class="sport-number">06</span>
+                    </div>
+                    <div class="sports-detail-body">
+                        <div class="sport-label">AQUATIC SPORT</div>
+                        <h3>SWIMMING</h3>
+                        <p>Build stroke efficiency, breathing control, body position and endurance through progressive pool sessions.</p>
+                        <div class="sport-tags">
+                            <span>Technique</span><span>Endurance</span><span>Breathing</span>
+                        </div>
+                        <span class="sport-link">VIEW TRAINING <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a class="sports-detail-card" href="404.html" data-aos="fade-up" data-aos-delay="480">
+                    <div class="sports-detail-image">
+                        <img src="assets/images/pictures/37.webp" alt="Athletics sprint training">
+                        <span class="sport-number">07</span>
+                    </div>
+                    <div class="sports-detail-body">
+                        <div class="sport-label">TRACK & FIELD</div>
+                        <h3>ATHLETICS</h3>
+                        <p>Develop acceleration, running mechanics, power and conditioning with focused track-based performance work.</p>
+                        <div class="sport-tags">
+                            <span>Sprint</span><span>Power</span><span>Technique</span>
+                        </div>
+                        <span class="sport-link">VIEW TRAINING <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a class="sports-detail-card" href="404.html" data-aos="fade-up" data-aos-delay="560">
+                    <div class="sports-detail-image">
+                        <img src="assets/images/pictures/38.webp" alt="Boxing training">
+                        <span class="sport-number">08</span>
+                    </div>
+                    <div class="sports-detail-body">
+                        <div class="sport-label">COMBAT SPORT</div>
+                        <h3>BOXING</h3>
+                        <p>Combine footwork, combinations, defensive movement, conditioning and controlled ring awareness.</p>
+                        <div class="sport-tags">
+                            <span>Footwork</span><span>Combinations</span><span>Fitness</span>
+                        </div>
+                        <span class="sport-link">VIEW TRAINING <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TRAINING METHOD ================= -->
+    <section class="training-method section-pad">
+        <div class="container">
+            <div class="method-grid">
+                <div class="method-copy" data-aos="fade-right">
+                    <div class="section-tag">HOW WE TRAIN</div>
+                    <h2 class="section-title">MORE THAN <span>REPS.</span></h2>
+                    <p>
+                        Our training system moves beyond simply repeating drills.
+                        Athletes learn why a movement matters, how to execute it
+                        under pressure and how to turn practice into reliable
+                        performance.
+                    </p>
+                    <a class="outline-btn" href="404.html">SEE OUR METHOD <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="method-steps" data-aos="fade-left">
+                    <a class="method-step" href="404.html">
+                        <span>01</span>
+                        <div>
+                            <h3>ASSESS</h3>
+                            <p>Understand movement quality, current ability and the areas that need the most attention.</p>
+                        </div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a class="method-step" href="404.html">
+                        <span>02</span>
+                        <div>
+                            <h3>BUILD</h3>
+                            <p>Develop technical habits, strength, speed and sport-specific fundamentals.</p>
+                        </div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a class="method-step" href="404.html">
+                        <span>03</span>
+                        <div>
+                            <h3>COMPETE</h3>
+                            <p>Use controlled competition and match scenarios to make skills work under pressure.</p>
+                        </div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a class="method-step" href="404.html">
+                        <span>04</span>
+                        <div>
+                            <h3>EVOLVE</h3>
+                            <p>Review performance, refine details and set the next measurable target.</p>
+                        </div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PERFORMANCE ZONES ================= -->
+    <section class="performance-section section-pad">
+        <div class="container">
+            <div class="section-head" data-aos="fade-up">
+                <div>
+                    <div class="section-tag">BUILT AROUND THE ATHLETE</div>
+                    <h2 class="section-title">ONE CLUB. <span>MANY PATHS.</span></h2>
+                </div>
+                <p class="section-copy">
+                    Whatever the sport, the objective stays the same: better movement,
+                    better decisions and better performance.
+                </p>
+            </div>
+
+            <div class="performance-grid">
+                <a class="performance-card" href="404.html" data-aos="zoom-in">
+                    <div class="performance-icon"><i class="fa-solid fa-person-running"></i></div>
+                    <span>01</span>
+                    <h3>YOUTH DEVELOPMENT</h3>
+                    <p>Strong fundamentals, confidence and movement literacy for athletes building their first competitive habits.</p>
+                </a>
+
+                <a class="performance-card" href="404.html" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="performance-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                    <span>02</span>
+                    <h3>PERFORMANCE TRAINING</h3>
+                    <p>Strength, speed, agility and conditioning sessions built around the demands of your chosen sport.</p>
+                </a>
+
+                <a class="performance-card" href="404.html" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="performance-icon"><i class="fa-solid fa-medal"></i></div>
+                    <span>03</span>
+                    <h3>COMPETITION PREP</h3>
+                    <p>Match scenarios, pressure drills and tactical preparation designed to turn practice into competitive confidence.</p>
+                </a>
+
+                <a class="performance-card" href="404.html" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="performance-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <span>04</span>
+                    <h3>PERFORMANCE REVIEW</h3>
+                    <p>Track progress, identify gaps and refine the next stage of development with a clearer performance plan.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="sports-page-cta">
+        <div class="sports-page-cta-bg"></div>
+        <div class="container sports-page-cta-inner" data-aos="fade-up">
+            <div class="section-tag">YOUR NEXT SESSION STARTS HERE</div>
+            <h2>CHOOSE YOUR <span>SPORT.</span><br>RAISE YOUR <span>STANDARD.</span></h2>
+            <p>Find the training environment that challenges you to move, compete and improve.</p>
+            <div class="sports-page-actions center">
+                <a class="join-btn" href="404.html">JOIN STACKLY <i class="fa-solid fa-arrow-right"></i></a>
+                <a class="outline-btn" href="404.html">EXPLORE OUR CLUB</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+<div class="container">
+<div class="footer-main">
+<div class="footer-brand">
+<a aria-label="STACKLY Sports Club Home" class="footer-logo-link" href="index.html">
+<img alt="STACKLY Sports Club" src="assets/images/logo/stackly_logo.webp"/>
+</a>
+<p>A modern sports destination where passion, discipline and performance come together to build stronger athletes and a stronger community.</p>
+<div class="footer-accent"></div>
+<div class="socials">
+<a aria-label="Email" href="404.html"><i class="fa-solid fa-envelope"></i></a>
+<a aria-label="LinkedIn" href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+<a aria-label="X" href="404.html"><i class="fa-brands fa-x-twitter"></i></a>
+<a aria-label="Facebook" href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a aria-label="Instagram" href="404.html"><i class="fa-brands fa-instagram"></i></a>
+</div>
+</div>
+<div class="footer-col">
+<h3>Explore</h3>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="sports.html">Sports</a></li>
+<li><a href="packages.html">Packages</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Experience</h3>
+<ul>
+<li><a href="404.html">Our Facilities</a></li>
+<li><a href="404.html">Training Programs</a></li>
+<li><a href="404.html">Tournaments</a></li>
+<li><a href="404.html">Membership</a></li>
+<li><a href="404.html">Coaching</a></li>
+</ul>
+</div>
+<div class="newsletter-box">
+<h3>Stay Connected</h3>
+<p>Get club updates, upcoming tournaments, training news and the latest STACKLY sports experiences.</p>
+<form class="newsletter-form" id="newsletterForm">
+<input aria-label="Your Email" autocomplete="email" id="newsletterEmail" inputmode="email" maxlength="254" name="newsletterEmail" pattern="[A-Za-z0-9][A-Za-z0-9.!#$%&amp;'*+/=?^_`{|}~-]{0,63}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z]{2,24})+" placeholder="Your Email" required="" title="Enter a valid professional email address, for example name@company.com" type="email"/>
+<button type="submit">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="footer-contact">
+<div class="contact-strip">
+<div class="contact-item"><i class="fa-solid fa-location-dot"></i><span>MMR Complex, Salem, TN, India</span></div>
+<div class="contact-item"><i class="fa-solid fa-envelope"></i><span><a href="mailto:support@stackly.com">support@stackly.com</a></span></div>
+<div class="contact-item"><i class="fa-solid fa-phone"></i><span><a href="tel:+91-70107927450">+91-70107927450</a></span></div>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="copyright">
+<span>© 2026 STACKLY Sports Club. All Rights Reserved.</span>
+<div class="footer-legal"><a href="404.html">Privacy Policy</a><a href="404.html">Terms &amp; Conditions</a></div>
+</div>
+</div>
+</div>
+</footer>
+<a aria-label="Back to top" class="back-top" href="#home" id="backTop"><i class="fa-solid fa-arrow-up"></i></a>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+        (function(){
+            "use strict";
+
+            const preloader = document.getElementById("sports-preloader");
+            const logo = document.querySelector(".preloader-logo");
+            const header = document.getElementById("header");
+            const menuToggle = document.getElementById("menuToggle");
+            const mobileNav = document.getElementById("mobileNav");
+            const backTop = document.getElementById("backTop");
+            const newsletterForm = document.getElementById("newsletterForm");
+            const newsletterEmail = document.getElementById("newsletterEmail");
+
+            function hidePreloader(){
+                if(!preloader || preloader.dataset.hidden === "true") return;
+                preloader.dataset.hidden = "true";
+                preloader.classList.add("preloader-hidden");
+                setTimeout(() => preloader.remove(), 800);
+            }
+
+            if(logo && !logo.complete){
+                logo.addEventListener("load",()=>setTimeout(hidePreloader,2100),{once:true});
+                logo.addEventListener("error",()=>setTimeout(hidePreloader,2100),{once:true});
+            }else{
+                setTimeout(hidePreloader,2100);
+            }
+            setTimeout(hidePreloader,5000);
+
+            if(window.AOS){
+                AOS.init({
+                    duration:900,
+                    easing:"ease-out-cubic",
+                    once:true,
+                    offset:90,
+                    mirror:false,
+                    disable:window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                });
+            }
+
+            function updateHeader(){
+                if(window.scrollY > 30) header.classList.add("scrolled");
+                else header.classList.remove("scrolled");
+
+                if(window.scrollY > 500) backTop.classList.add("show");
+                else backTop.classList.remove("show");
+            }
+            window.addEventListener("scroll",updateHeader,{passive:true});
+            updateHeader();
+
+            /* Back-to-top button — explicit click/tap handler for all devices. */
+            if(backTop){
+                backTop.addEventListener("click",function(event){
+                    event.preventDefault();
+                    window.scrollTo({top:0,left:0,behavior:"smooth"});
+                });
+            }
+
+            function setMobileMenu(open){
+                mobileNav.classList.toggle("active",open);
+                document.body.classList.toggle("mobile-menu-open",open);
+                menuToggle.setAttribute("aria-expanded",String(open));
+                menuToggle.setAttribute("aria-label",open ? "Close menu" : "Open menu");
+                menuToggle.innerHTML = open
+                    ? '<i class="fa-solid fa-xmark"></i>'
+                    : '<i class="fa-solid fa-bars"></i>';
+            }
+
+            menuToggle.addEventListener("click",function(){
+                setMobileMenu(!mobileNav.classList.contains("active"));
+            });
+
+            mobileNav.querySelectorAll("a").forEach(link=>{
+                link.addEventListener("click",()=>{
+                    setMobileMenu(false);
+                });
+            });
+
+            window.addEventListener("resize",()=>{
+                if(window.innerWidth > 1024 && mobileNav.classList.contains("active")){
+                    setMobileMenu(false);
+                }
+            });
+
+            /* Highlight the current page in desktop + mobile navigation. */
+            const currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+            document.querySelectorAll(".nav a, .mobile-nav a").forEach(link=>{
+                const rawHref = (link.getAttribute("href") || "").trim();
+                if(!rawHref || rawHref.startsWith("#") || rawHref === "login") return;
+
+                const linkPage = (rawHref.split("/").pop() || "index.html").split("#")[0].toLowerCase();
+                if(linkPage === currentPage){
+                    link.classList.add("active");
+                }
+            });
+
+            /* Newsletter validation + 404 redirect. */
+            if(newsletterForm && newsletterEmail){
+                newsletterForm.addEventListener("submit",function(event){
+                    event.preventDefault();
+
+                    const value = newsletterEmail.value.trim();
+                    const professionalEmail =
+                        /^[A-Za-z0-9](?!.*\.\.)[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]{0,63}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z]{2,24})+$/;
+
+                    if(!professionalEmail.test(value)){
+                        newsletterEmail.setCustomValidity("Enter a valid professional email address, for example name@company.com");
+                        newsletterEmail.reportValidity();
+                        newsletterEmail.setCustomValidity("");
+                        newsletterEmail.focus();
+                        return;
+                    }
+
+                    newsletterForm.reset();
+                    window.location.href = "404.html";
+                });
+            }
+
+            /* ---------------------------------------------------------
+               404 BACK RETURN HOVER RESET
+               --------------------------------------------------------- */
+            const RETURN_KEY = "stackly404ClickedId";
+            const clickable404 = Array.from(
+                document.querySelectorAll('main a[href="404.html"]')
+            );
+
+            clickable404.forEach((el,index)=>{
+                const id = "stackly-404-target-" + index;
+                el.dataset.stackly404Id = id;
+
+                el.addEventListener("click",()=>{
+                    try{
+                        sessionStorage.setItem(RETURN_KEY,id);
+                    }catch(_){}
+                    el.blur();
+                });
+            });
+
+            let restoredTarget = null;
+            let returnResetActive = false;
+
+            function clearRestoredHover(){
+                if(!returnResetActive) return;
+
+                returnResetActive = false;
+                document.body.classList.remove("stackly-404-return");
+
+                document.querySelectorAll(".stackly-reset-hover").forEach(el=>{
+                    el.classList.remove("stackly-reset-hover");
+                });
+
+                restoredTarget = null;
+                window.removeEventListener("pointerdown",handleNewPointer,true);
+                window.removeEventListener("touchstart",handleNewPointer,true);
+            }
+
+            function handleNewPointer(event){
+                if(!restoredTarget) return;
+                if(event.target === restoredTarget || restoredTarget.contains(event.target)) return;
+                clearRestoredHover();
+            }
+
+            function restoreClickedElement(){
+                let savedId = null;
+                try{
+                    savedId = sessionStorage.getItem(RETURN_KEY);
+                    if(savedId) sessionStorage.removeItem(RETURN_KEY);
+                }catch(_){}
+
+                /*
+                 * REAL MOBILE (767px and below):
+                 * Never restore the previously clicked hover target.
+                 * This prevents the 404 -> Back navigation from bringing
+                 * the old CTA/card hover state back onto the home page.
+                 */
+                if(window.matchMedia("(max-width:767px)").matches){
+                    document.body.classList.remove("stackly-404-return");
+                    document.querySelectorAll(".stackly-reset-hover").forEach(el=>{
+                        el.classList.remove("stackly-reset-hover");
+                    });
+                    return;
+                }
+
+                const navigationEntries = performance.getEntriesByType("navigation");
+                const isHistoryBack =
+                    !!(navigationEntries[0] && navigationEntries[0].type === "back_forward");
+
+                if(!savedId && !isHistoryBack && !document.wasDiscarded) return;
+
+                const target = savedId
+                    ? document.querySelector(`[data-stackly-404-id="${CSS.escape(savedId)}"]`)
+                    : null;
+
+                if(!target) return;
+
+                restoredTarget = target;
+                returnResetActive = true;
+                document.body.classList.add("stackly-404-return");
+
+                /* Reset the clicked target and hoverable card parent. */
+                target.classList.add("stackly-reset-hover");
+
+                const parentCard = target.closest(".sport-card, .event-card, .gallery-item, .sports-detail-card, .method-step, .performance-card, .sports-hero-panel");
+                if(parentCard){
+                    parentCard.classList.add("stackly-reset-hover");
+                }
+
+                if(document.activeElement && typeof document.activeElement.blur === "function"){
+                    document.activeElement.blur();
+                }
+
+                /*
+                 * Do not allow the restored element to immediately receive a
+                 * new interaction from a stale pointer/focus state. The user
+                 * can interact elsewhere, which releases the reset naturally.
+                 */
+                window.addEventListener("pointerdown",handleNewPointer,true);
+                window.addEventListener("touchstart",handleNewPointer,true);
+
+                /* Safety release; the page remains fully usable. */
+                window.setTimeout(clearRestoredHover,2200);
+            }
+
+            window.addEventListener("pageshow",restoreClickedElement);
+
+        })();
+    
+            /* Mobile/touch: prevent browsers from retaining the last hover target. */
+            if(window.matchMedia("(max-width:767px), (hover:none) and (pointer:coarse)").matches){
+                document.addEventListener("touchend",()=>{
+                    if(document.activeElement && typeof document.activeElement.blur === "function"){
+                        document.activeElement.blur();
+                    }
+                },{passive:true});
+            }
+
+
+            /* Mobile: clear sticky focus after a tap so it cannot mimic hover. */
+            if(window.matchMedia("(max-width:767px)").matches){
+                document.addEventListener("touchend",function(event){
+                    const el = event.target.closest("a,button");
+                    if(el && typeof el.blur === "function"){
+                        setTimeout(()=>el.blur(),0);
+                    }
+                },{passive:true});
+
+                document.addEventListener("click",function(event){
+                    const el = event.target.closest("a,button");
+                    if(el && typeof el.blur === "function"){
+                        setTimeout(()=>el.blur(),0);
+                    }
+                });
+            }
+
+</script>
+</body>
+</html>

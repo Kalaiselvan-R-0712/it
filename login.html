@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | STACKLY</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+
+:root{
+ --black:#02040a;--ink:#050913;--panel:#07111f;--panel2:#0a1626;
+ --cyan:#19dcff;--blue:#168bff;--violet:#7b45ff;--pink:#b33cff;
+ --white:#f7fbff;--text:#c7d4e3;--muted:#7890a8;--line:rgba(96,190,255,.15);
+ --glow:rgba(25,220,255,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100%;width:100%}
+html{background:var(--black)}
+body{
+ min-height:100vh;overflow-x:hidden;font-family:Inter,Arial,sans-serif;color:var(--white);
+ background:var(--black);line-height:1.6;
+ display:grid;place-items:center;padding:0;
+}
+a{text-decoration:none;color:inherit}button,input{font:inherit}img{max-width:100%;display:block}
+
+/* ================= INDEX PRELOADER (SOURCE OF TRUTH) ================= */
+#preloader { --theme: #384BFF; --bg: #F3F7FB; }
+.preloader {
+  align-items: center;
+  cursor: default;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 9999999;
+}
+.preloader .animation-preloader {
+  z-index: 1000;
+}
+.preloader .animation-preloader .spinner {
+  animation: spinner 1s infinite linear;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-top-color: var(--theme);
+  height: 9em;
+  margin: 0 auto 3.5em auto;
+  width: 9em;
+}
+@media (max-width: 767px) {
+  .preloader .animation-preloader .spinner {
+    width: 7.5em;
+    height: 7.5em;
+    margin: 0 auto 1.5em auto;
+  }
+}
+.preloader .animation-preloader .txt-loading {
+  font: bold 5em "Rajdhani", sans-serif, "Plus Jakarta Sans", sans-serif;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+@media (max-width: 767px) {
+  .preloader .animation-preloader .txt-loading {
+    font-size: 2.5em;
+  }
+}
+.preloader .animation-preloader .txt-loading .letters-loading {
+  color: var(--theme);
+  position: relative;
+}
+.preloader .animation-preloader .txt-loading .letters-loading:nth-child(2):before {
+  animation-delay: 0.2s;
+}
+.preloader .animation-preloader .txt-loading .letters-loading:nth-child(3):before {
+  animation-delay: 0.4s;
+}
+.preloader .animation-preloader .txt-loading .letters-loading:nth-child(4):before {
+  animation-delay: 0.6s;
+}
+.preloader .animation-preloader .txt-loading .letters-loading:nth-child(5):before {
+  animation-delay: 0.8s;
+}
+.preloader .animation-preloader .txt-loading .letters-loading:nth-child(6):before {
+  animation-delay: 1s;
+}
+.preloader .animation-preloader .txt-loading .letters-loading:nth-child(7):before {
+  animation-delay: 1.2s;
+}
+.preloader .animation-preloader .txt-loading .letters-loading:nth-child(8):before {
+  animation-delay: 1.4s;
+}
+.preloader .animation-preloader .txt-loading .letters-loading::before {
+  animation: letters-loading 4s infinite;
+  color: var(--header);
+  content: attr(data-text-preloader);
+  left: 0;
+  opacity: 0;
+  font-family: "Rajdhani", sans-serif;
+  position: absolute;
+  top: -3px;
+  transform: rotateY(-90deg);
+}
+.preloader p {
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  color: var(--theme);
+}
+.preloader .loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.preloader .loader .row {
+  height: 100%;
+}
+.preloader .loader .loader-section {
+  padding: 0px;
+}
+.preloader .loader .loader-section .bg {
+  background-color: var(--bg);
+  height: 100%;
+  left: 0;
+  width: 100%;
+  transition: all 800ms cubic-bezier(0.77, 0, 0.175, 1);
+}
+.preloader.loaded .animation-preloader {
+  opacity: 0;
+  transition: 0.3s ease-out;
+}
+.preloader.loaded .loader-section .bg {
+  width: 0;
+  transition: 0.7s 0.3s allcubic-bezier(0.1, 0.1, 0.1, 1);
+}
+
+@keyframes spinner {
+  to { transform: rotateZ(360deg); }
+}
+@keyframes letters-loading {
+  0%, 75%, 100% { opacity: 0; transform: rotateY(-90deg); }
+  25%, 50% { opacity: 1; transform: rotateY(0deg); }
+}
+
+/* ================= SCREEN / REFERENCE LAYOUT ================= */
+.login-shell{width:100%;min-height:100vh;display:grid;grid-template-columns:50% 50%;background:var(--black)}
+.visual-side{position:relative;min-height:100vh;overflow:hidden;background:
+ linear-gradient(135deg,rgba(2,4,10,.08),rgba(2,4,10,.55)),
+ linear-gradient(90deg,rgba(2,4,10,.82) 0%,rgba(2,7,17,.56) 48%,rgba(2,4,10,.22) 100%),
+ url("assets/images/LR/01.webp") center/cover no-repeat;
+}
+.visual-side:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 15%,rgba(25,220,255,.20),transparent 28%),radial-gradient(circle at 88% 78%,rgba(123,69,255,.18),transparent 34%);pointer-events:none}
+.visual-side:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,4,10,.12) 0%,rgba(2,4,10,.05) 40%,rgba(2,4,10,.92) 100%);pointer-events:none}
+.visual-grid{position:absolute;inset:0;opacity:.23;background-image:linear-gradient(rgba(25,220,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(25,220,255,.055) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(to bottom,black,transparent 90%);animation:gridDrift 18s linear infinite}
+@keyframes gridDrift{to{background-position:70px 70px}}
+.brand{position:absolute;z-index:3;top:52px;left:44px;display:inline-flex;align-items:center}
+.brand img{width:220px;filter:drop-shadow(0 8px 25px rgba(25,220,255,.12))}
+.visual-copy{position:absolute;z-index:3;left:44px;right:42px;bottom:70px}
+.visual-copy .kicker{display:inline-flex;align-items:center;gap:9px;color:#7beaff;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:17px}
+.visual-copy .kicker i{font-size:6px}
+.visual-copy h2{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(36px,4vw,58px);line-height:1.01;letter-spacing:-2.7px;max-width:650px}
+.visual-copy h2 span{background:linear-gradient(90deg,#fff 10%,#55eaff 55%,#8d6cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.visual-copy p{color:#8fa5b9;font-size:13px;max-width:570px;margin-top:18px}
+.visual-stats{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.visual-stat{padding:9px 13px;border:1px solid rgba(96,190,255,.16);border-radius:13px;background:rgba(4,12,24,.46);backdrop-filter:blur(12px)}
+.visual-stat strong{display:block;font-family:"Space Grotesk";font-size:15px;color:#fff}.visual-stat span{font-size:8px;color:#6f879c;text-transform:uppercase;letter-spacing:1px}
+
+.form-side{min-height:100vh;background:linear-gradient(180deg,#06101c 0%,#02060d 100%);display:flex;align-items:center;justify-content:center;padding:52px 7vw;position:relative;overflow:hidden}
+.form-side:before{content:"";position:absolute;width:520px;height:520px;right:-250px;top:-180px;background:radial-gradient(circle,rgba(25,220,255,.12),transparent 68%);pointer-events:none}
+.form-side:after{content:"";position:absolute;width:500px;height:500px;left:-280px;bottom:-260px;background:radial-gradient(circle,rgba(123,69,255,.11),transparent 68%);pointer-events:none}
+.auth-wrapper{width:min(100%,650px);position:relative;z-index:2}
+.back-home{display:inline-flex;align-items:center;gap:10px;color:#8da3b7;font-size:13px;font-weight:700;margin-bottom:28px;transition:.3s ease}
+.back-home i{color:var(--cyan);font-size:13px}.back-home:hover{color:#fff;transform:translateX(-4px)}
+.auth-content{width:100%;padding:0;background:transparent}
+.auth-logo{display:none}
+.heading{text-align:left;margin-bottom:31px}.heading .eyebrow{color:var(--cyan);font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}.heading h1{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(42px,4.3vw,64px);line-height:1;letter-spacing:-3px;margin-bottom:14px}.heading p{color:#8197ab;font-size:14px;max-width:600px}
+.form-status{display:none;margin-bottom:14px;padding:10px 12px;border:1px solid rgba(25,220,255,.24);border-radius:12px;color:#a7c8dc;background:rgba(25,220,255,.055);text-align:center;font-size:11px}.form-status.show{display:block}
+
+/* ROLE — screenshot-style segmented control, values remain User/Admin */
+.input-group{margin-bottom:21px}.input-group:first-child>label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.input-group label{display:block;margin-bottom:9px;color:#dce8f2;font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+.custom-select{position:relative;width:100%;height:68px;border:1px solid rgba(96,190,255,.18);border-radius:100px;padding:5px;background:rgba(7,17,31,.9);box-shadow:inset 0 0 0 1px rgba(255,255,255,.018)}
+.select-btn{display:none}.select-menu{position:static;width:100%;height:100%;display:flex!important;padding:0;border:0;border-radius:100px;background:transparent;box-shadow:none;z-index:auto;gap:4px}
+.option{width:50%;height:100%;display:flex;align-items:center;justify-content:center;gap:11px;padding:0 12px;border-radius:100px;color:#7890a8;font-size:12px;font-weight:800;letter-spacing:.6px;cursor:pointer;transition:.3s ease}
+.option:before{font-family:"Font Awesome 6 Free";font-weight:900;font-size:13px}.option[data-value="User"]:before{content:"\f2bd"}.option[data-value="Admin"]:before{content:"\f508"}
+.option:hover{color:#fff;background:rgba(25,220,255,.07)}.option.selected{color:#001016;background:linear-gradient(100deg,var(--cyan),var(--blue) 55%,var(--violet));box-shadow:0 10px 30px rgba(25,220,255,.18)}
+.error{display:none;margin-top:6px;color:#ff9d9d;font-size:10px;font-weight:600}.error.show{display:block}
+
+.input-wrap{position:relative}.input-wrap>i{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#62788c;font-size:13px;pointer-events:none;transition:.25s ease}.input-wrap input{width:100%;height:58px;padding:0 47px;border:1px solid rgba(96,190,255,.16);border-radius:14px;outline:none;color:#f7fbff;background:rgba(7,17,31,.72);transition:.3s ease}.input-wrap input::placeholder{color:#536a7f}.input-wrap input:hover{border-color:rgba(25,220,255,.35)}.input-wrap input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(25,220,255,.08),0 0 30px rgba(25,220,255,.06);background:#071321}.input-wrap:focus-within>i{color:var(--cyan)}
+.password-toggle{position:absolute;right:9px;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:50%;color:#71869a;background:transparent;cursor:pointer;transition:.25s ease}.password-toggle:hover{color:var(--cyan);background:rgba(25,220,255,.09)}
+.remember-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 22px;color:#70869a;font-size:11px}.remember-label{display:flex;align-items:center;gap:8px;cursor:pointer}.remember-label input{width:14px;height:14px;accent-color:var(--cyan)}.forgot-pass-link{color:#7890a8;transition:.25s ease}.forgot-pass-link:hover{color:var(--cyan)}
+.btn-primary{width:100%;height:58px;border:0;border-radius:14px;color:#001016;background:linear-gradient(100deg,var(--cyan),var(--blue) 55%,var(--violet));font-weight:900;cursor:pointer;transition:.3s ease;box-shadow:0 14px 38px rgba(25,220,255,.14);font-size:13px}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(25,220,255,.28),0 0 24px rgba(123,69,255,.12)}.btn-primary:disabled{opacity:.7;cursor:not-allowed;transform:none}
+.auth-link{text-align:center;margin-top:18px;color:#6f8498;font-size:11px}.auth-link a{color:var(--cyan);font-weight:800;transition:.25s}.auth-link a:hover{color:#fff}
+.demo-box{margin-top:22px;padding:12px 15px;border:1px solid rgba(96,190,255,.12);border-radius:13px;color:#6f8498;background:rgba(7,17,31,.5);font-size:9px;line-height:1.65}.demo-box strong{color:#b9d0df}.demo-box ul{padding-left:15px;margin-top:2px}
+
+/* DESKTOP ONLY HOVER — matches index behavior */
+@media (min-width:1025px) and (hover:hover) and (pointer:fine){
+ .brand img{transition:.35s cubic-bezier(.22,1,.36,1)}.brand:hover img{transform:translateY(-2px) scale(1.025);filter:drop-shadow(0 8px 25px rgba(25,220,255,.28))}
+}
+@media (max-width:1024px),(hover:none),(pointer:coarse){
+ .back-home:hover,.btn-primary:hover,.password-toggle:hover,.option:hover,.forgot-pass-link:hover,.auth-link a:hover{transform:none!important}.back-home:hover{color:#8da3b7}.btn-primary:hover{box-shadow:0 14px 38px rgba(25,220,255,.14)}.password-toggle:hover{color:#71869a;background:transparent}.option:hover{color:#7890a8;background:transparent}.forgot-pass-link:hover,.auth-link a:hover{color:inherit}
+}
+
+@media(max-width:900px){
+ body{display:block}.login-shell{grid-template-columns:1fr;min-height:100vh}.visual-side{min-height:38vh;height:38vh}.brand{top:24px;left:24px}.brand img{width:175px}.visual-copy{left:24px;right:24px;bottom:28px}.visual-copy .kicker{margin-bottom:8px}.visual-copy h2{font-size:clamp(29px,7vw,44px);letter-spacing:-1.8px}.visual-copy p,.visual-stats{display:none}.form-side{min-height:62vh;padding:32px 24px 44px;align-items:flex-start}.auth-wrapper{max-width:650px}.back-home{margin-bottom:24px}.heading h1{font-size:clamp(38px,8vw,55px)}
+}
+@media(max-width:600px){
+ .visual-side{min-height:31vh;height:31vh}.brand{top:20px;left:20px}.brand img{width:150px}.visual-copy{bottom:20px}.visual-copy .kicker{font-size:8px;letter-spacing:1.5px}.visual-copy h2{font-size:28px}.form-side{min-height:69vh;padding:25px 18px 35px}.heading{margin-bottom:24px}.heading h1{font-size:39px;letter-spacing:-2px}.heading p{font-size:12px}.custom-select{height:60px}.option{font-size:10px}.input-group{margin-bottom:17px}.input-wrap input{height:54px;border-radius:12px}.btn-primary{height:54px;border-radius:12px}.demo-box{display:block;margin-top:22px;padding:14px 15px;font-size:10px;line-height:1.7;min-height:0;visibility:visible;opacity:1}
+}
+@media(max-width:380px){.form-side{padding-left:14px;padding-right:14px}.brand img{width:135px}.visual-copy h2{font-size:25px}.heading h1{font-size:35px}.remember-row{font-size:10px}.option{font-size:9px;gap:7px}}
+@media(max-width:600px){
+ .demo-box{display:block;width:100%;margin:20px 0 0;padding:14px 15px;border-radius:13px;font-size:10px;line-height:1.7;overflow:visible;visibility:visible;opacity:1}
+ .demo-box strong{display:block;margin-bottom:3px;font-size:10px}
+ .demo-box ul{margin:2px 0 0;padding-left:16px}
+ .demo-box li{margin:2px 0;overflow-wrap:anywhere}
+}
+@media(max-width:380px){
+ .demo-box{font-size:9.5px;padding:13px 14px;line-height:1.65}
+}
+
+/* =========================================================
+   MOBILE VISUAL PANEL FIX
+   Prevents the logo, kicker and growth headline from
+   collapsing/overlapping on narrow screens.
+   Desktop/tablet layout remains unchanged.
+   ========================================================= */
+@media (max-width:900px){
+  .visual-side{
+    min-height:430px;
+    height:430px;
+  }
+
+  .brand{
+    top:20px;
+    left:22px;
+    right:22px;
+  }
+
+  .brand img{
+    width:165px;
+    max-width:72vw;
+    height:auto;
+  }
+
+  .visual-copy{
+    left:22px;
+    right:22px;
+    top:112px;
+    bottom:auto;
+  }
+
+  .visual-copy .kicker{
+    margin-bottom:12px;
+    line-height:1.3;
+    white-space:nowrap;
+  }
+
+  .visual-copy h2{
+    margin:0;
+    max-width:100%;
+    font-size:clamp(30px,7.2vw,43px);
+    line-height:1.02;
+    letter-spacing:-1.7px;
+    overflow-wrap:normal;
+    word-break:normal;
+  }
+
+  .visual-copy p,
+  .visual-stats{
+    display:none;
+  }
+}
+
+@media (max-width:600px){
+  .visual-side{
+    min-height:360px;
+    height:360px;
+  }
+
+  .brand{
+    top:17px;
+    left:18px;
+    right:18px;
+  }
+
+  .brand img{
+    width:145px;
+    max-width:68vw;
+  }
+
+  .visual-copy{
+    left:18px;
+    right:18px;
+    top:96px;
+  }
+
+  .visual-copy .kicker{
+    font-size:8px;
+    letter-spacing:1.5px;
+    margin-bottom:10px;
+  }
+
+  .visual-copy h2{
+    font-size:clamp(27px,8vw,34px);
+    line-height:1.03;
+    letter-spacing:-1.45px;
+  }
+}
+
+@media (max-width:380px){
+  .visual-side{
+    min-height:335px;
+    height:335px;
+  }
+
+  .brand{
+    top:15px;
+    left:16px;
+    right:16px;
+  }
+
+  .brand img{
+    width:132px;
+  }
+
+  .visual-copy{
+    left:16px;
+    right:16px;
+    top:88px;
+  }
+
+  .visual-copy .kicker{
+    font-size:7px;
+    letter-spacing:1.15px;
+    margin-bottom:8px;
+  }
+
+  .visual-copy h2{
+    font-size:26px;
+    line-height:1.04;
+    letter-spacing:-1.2px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE ROLE SELECTION — SAME COLOR DIFFERENTIATION AS DESKTOP
+   The tapped ADMIN or USER must keep the selected gradient.
+   ========================================================= */
+@media (max-width:1024px){
+  .custom-select .option.selected{
+    color:#001016 !important;
+    background:linear-gradient(100deg,#19dcff 0%,#168bff 55%,#7b45ff 100%) !important;
+    box-shadow:0 10px 30px rgba(25,220,255,.22) !important;
+  }
+
+  .custom-select .option:not(.selected){
+    color:#7890a8 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+  }
+
+  /* Prevent touch/hover state from removing the selected color */
+  .custom-select .option.selected:hover,
+  .custom-select .option.selected:active,
+  .custom-select .option.selected:focus{
+    color:#001016 !important;
+    background:linear-gradient(100deg,#19dcff 0%,#168bff 55%,#7b45ff 100%) !important;
+    box-shadow:0 10px 30px rgba(25,220,255,.22) !important;
+  }
+}
+
+</style>
+
+</head>
+
+<body class="loading">
+
+<!-- Preloader Start -->
+    <div id="preloader" class="preloader">
+        <div class="animation-preloader">
+            <div class="spinner">
+            </div>
+            <div class="txt-loading">
+                <span data-text-preloader="S" class="letters-loading">
+                    S
+                </span>
+                <span data-text-preloader="T" class="letters-loading">
+                    T
+                </span>
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+                <span data-text-preloader="C" class="letters-loading">
+                    C
+                </span>
+                <span data-text-preloader="K" class="letters-loading">
+                    K
+                </span>
+                <span data-text-preloader="L" class="letters-loading">
+                    L
+                </span>
+                <span data-text-preloader="Y" class="letters-loading">
+                    Y
+                </span>
+            </div>
+            <p class="text-center">Loading</p>
+        </div>
+        <div class="loader">
+            <div class="row">
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-shell">
+  <!-- LEFT: REFERENCE VISUAL PANEL -->
+  <section class="visual-side" aria-label="Stackly IT introduction">
+    <div class="visual-grid"></div>
+    <a href="index.html" class="brand" aria-label="Stackly home">
+      <img src="assets/images/logo/stackly_logo.webp" alt="STACKLY">
+    </a>
+
+    <div class="visual-copy">
+      <div class="kicker"><i class="fa-solid fa-circle"></i> IT Solutions Startup</div>
+      <h2>YOUR NUMBERS ARE <span>WAITING.</span><br>LET'S GROW.</h2>
+      <p>Live dashboards · Smart automation · Real-time business intelligence</p>
+      <div class="visual-stats">
+        <div class="visual-stat"><strong>24/7</strong><span>Cloud Access</span></div>
+        <div class="visual-stat"><strong>99.9%</strong><span>Platform Uptime</span></div>
+        <div class="visual-stat"><strong>∞</strong><span>Scale Ready</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT: LOGIN PANEL -->
+  <section class="form-side">
+    <div class="auth-wrapper">
+      <a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to site</a>
+
+      <div class="auth-content">
+        <div class="heading">
+          <div class="eyebrow">Secure Workspace Access</div>
+          <h1>WELCOME BACK</h1>
+          <p>Log in to your Stackly workspace. Pick your role to continue.</p>
+        </div>
+
+        <div id="formStatus" class="form-status"></div>
+
+        <form id="loginForm" novalidate>
+          <!-- ROLE -->
+          <div class="input-group">
+            <label>Login As</label>
+            <div class="custom-select" id="customRole">
+              <div class="select-btn" id="selectBtn" tabindex="0">
+                <span id="selectedRole">--- Select Role ---</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="select-menu" id="selectMenu">
+                <div class="option" data-value="Admin"><span>ADMIN</span></div>
+                <div class="option" data-value="User"><span>USER</span></div>
+              </div>
+              <input type="hidden" id="role">
+            </div>
+            <p id="roleError" class="error">Please select a role.</p>
+          </div>
+
+          <!-- EMAIL -->
+          <div class="input-group">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" id="email" placeholder="you@domain.com" autocomplete="email">
+            </div>
+            <p id="emailError" class="error">Invalid email format.</p>
+          </div>
+
+          <!-- PASSWORD -->
+          <div class="input-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+              <button type="button" class="password-toggle" id="togglePass" aria-label="Show password">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+            <p id="passError" class="error">Min 8 chars, 1 Upper, 1 Lower, 1 Number &amp; 1 Symbol.</p>
+          </div>
+
+          <!-- REMEMBER -->
+          <div class="remember-row">
+            <label class="remember-label"><input type="checkbox" id="rememberMe"><span>Remember me</span></label>
+            <a href="404.html" class="forgot-pass-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary" id="loginButton">Log In <i class="fa-solid fa-arrow-right"></i></button>
+
+          <div class="auth-link">New to Stackly? <a href="register.html">Register</a></div>
+
+          <div class="demo-box">
+            <strong>Demo Credentials</strong>
+            <ul>
+              <li>Admin: admin@stackly.com</li>
+              <li>User: user@stackly.com</li>
+              <li>Password: any valid strong password</li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+/* STACKLY IT SOLUTIONS PRELOADER — SAME AS INDEX.HTML */
+(function () {
+  function loader() {
+    function reveal() {
+      var preloader = document.querySelector(".preloader");
+      if (!preloader) return;
+      preloader.classList.add("loaded");
+      setTimeout(function () {
+        preloader.style.display = "none";
+      }, 600);
+    }
+
+    if (document.readyState === "complete") {
+      setTimeout(reveal, 0);
+    } else {
+      window.addEventListener("load", function () {
+        reveal();
+      }, { once: true });
+    }
+  }
+  loader();
+})();
+
+/* ELEMENTS */
+const loginForm=document.getElementById("loginForm");
+const email=document.getElementById("email");
+const password=document.getElementById("password");
+const role=document.getElementById("role");
+
+const roleError=document.getElementById("roleError");
+const emailError=document.getElementById("emailError");
+const passError=document.getElementById("passError");
+const formStatus=document.getElementById("formStatus");
+const loginButton=document.getElementById("loginButton");
+
+const togglePass=document.getElementById("togglePass");
+const selectBtn=document.getElementById("selectBtn");
+const selectMenu=document.getElementById("selectMenu");
+const selectedRole=document.getElementById("selectedRole");
+const customRole=document.getElementById("customRole");
+
+/* PASSWORD TOGGLE */
+togglePass.addEventListener("click",function(){
+    const show=password.type==="password";
+
+    password.type=show?"text":"password";
+
+    const icon=togglePass.querySelector("i");
+    icon.classList.toggle("fa-eye",!show);
+    icon.classList.toggle("fa-eye-slash",show);
+
+    togglePass.setAttribute(
+        "aria-label",
+        show?"Hide password":"Show password"
+    );
+});
+
+/* ROLE DROPDOWN */
+function closeMenu(){
+    selectMenu.classList.remove("show");
+    selectBtn.classList.remove("open");
+}
+
+selectBtn.addEventListener("click",function(e){
+    e.stopPropagation();
+    selectMenu.classList.toggle("show");
+    selectBtn.classList.toggle("open");
+});
+
+selectBtn.addEventListener("keydown",function(e){
+    if(e.key==="Enter" || e.key===" "){
+        e.preventDefault();
+        selectBtn.click();
+    }
+
+    if(e.key==="Escape"){
+        closeMenu();
+    }
+});
+
+document.querySelectorAll(".option").forEach(function(option){
+    option.addEventListener("click",function(){
+        selectedRole.textContent=option.dataset.value;
+        role.value=option.dataset.value;
+        document.querySelectorAll(".option").forEach(function(item){item.classList.remove("selected")});
+        option.classList.add("selected");
+        roleError.classList.remove("show");
+        closeMenu();
+    });
+});
+
+document.addEventListener("click",function(e){
+    if(!customRole.contains(e.target)){
+        closeMenu();
+    }
+});
+
+/* VALIDATION */
+const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const passPattern=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+function clearStatus(){
+    formStatus.classList.remove("show");
+    formStatus.textContent="";
+}
+
+email.addEventListener("input",function(){
+    emailError.classList.remove("show");
+    clearStatus();
+});
+
+password.addEventListener("input",function(){
+    passError.classList.remove("show");
+    clearStatus();
+});
+
+/* LOGIN — REFERENCE ACTIONS PRESERVED */
+loginForm.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    let valid=true;
+
+    /* ROLE CHECK */
+    if(role.value===""){
+        roleError.classList.add("show");
+        valid=false;
+    }else{
+        roleError.classList.remove("show");
+    }
+
+    /* EMAIL CHECK */
+    if(!emailPattern.test(email.value.trim())){
+        emailError.classList.add("show");
+        valid=false;
+    }else{
+        emailError.classList.remove("show");
+    }
+
+    /* PASSWORD CHECK */
+    if(!passPattern.test(password.value)){
+        passError.textContent=
+            "Min 8 chars, 1 Upper, 1 Lower, 1 Number & 1 Symbol.";
+        passError.classList.add("show");
+        valid=false;
+    }else{
+        passError.classList.remove("show");
+    }
+
+    if(!valid) return;
+
+    /* SAVE USER DATA */
+    localStorage.removeItem("userData");
+
+    const userData={
+        email:email.value.trim(),
+        role:role.value.trim(),
+        loginTime:new Date().toISOString()
+    };
+
+    localStorage.setItem("userData",JSON.stringify(userData));
+    localStorage.setItem("isLoggedIn","true");
+
+    /* REMEMBER EMAIL ONLY */
+    if(document.getElementById("rememberMe").checked){
+        localStorage.setItem(
+            "stacklyRememberEmail",
+            email.value.trim()
+        );
+    }else{
+        localStorage.removeItem("stacklyRememberEmail");
+    }
+
+    /* REDIRECT — SAME AS REFERENCE */
+    formStatus.textContent="Login successful. Redirecting...";
+    formStatus.classList.add("show");
+
+    loginButton.disabled=true;
+    loginButton.innerHTML=
+        'Redirecting <i class="fa-solid fa-circle-notch fa-spin"></i>';
+
+    setTimeout(function(){
+        if(role.value==="Admin"){
+            window.location.href="ae_dashboard.html";
+        }else{
+            window.location.href="fm_dashboard.html";
+        }
+    },450);
+});
+
+/* REMEMBERED EMAIL */
+window.addEventListener("DOMContentLoaded",function(){
+    const remembered=localStorage.getItem("stacklyRememberEmail");
+
+    if(remembered){
+        email.value=remembered;
+        document.getElementById("rememberMe").checked=true;
+    }
+});
+
+</script>
+</body>
+</html>
